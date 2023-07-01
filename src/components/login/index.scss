@@ -31,28 +31,13 @@
   align-items: center;
 }
 
-.circle-cutout {
-  position: relative;
-}
-
-.circle-cutout::after {
-  position: absolute;
-  content: "";
-  bottom: 0;
-  left: 33%;
-  height: 80%;
-  width: 33%;
-  background-color: #F3F3F3;
-  //background: rgba(255, 255, 255, .5);
-  clip-path: ellipse(50% 50% at 50% 100%);
-}
-
 .login-button {
   width: auto;
   height: 75px;
   position: absolute;
   bottom: 0;
-  left: 39%;
+  left: 42%;
   z-index: 1;
   margin-bottom: -20px;
+  box-shadow: 0 0 0 10px #F3F3F3;
 }

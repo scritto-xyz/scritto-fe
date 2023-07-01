@@ -1,0 +1,13 @@
+.bigger-circle {
+  height: 7em;
+  width: 7em;
+  background-color: #F3F3F3;
+  border-radius: 50%;
+  display: inline-block;
+  margin-top: -3rem;
+
+  svg {
+    margin: 1rem 0;
+    justify-self: center;
+  }
+}
