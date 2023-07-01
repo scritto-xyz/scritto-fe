@@ -1,12 +1,17 @@
 .login-container {
   background-image: url("../../../public/assets/LoginHeaderGraphicMobile.png");
   height: 100svh;
-  padding: 230px 5% 0 5%;
+  padding: 0 5%;
   background-repeat: no-repeat;
   background-position: top;
+}
+
+.login-content {
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-end;
 }
 
 .login-cta {
