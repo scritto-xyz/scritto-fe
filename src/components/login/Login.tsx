@@ -1,10 +1,18 @@
-import { Component } from "solid-js";
+import { JSX } from "solid-js";
 import BasicTextField from "../common/TextField";
 import "./index.scss";
 import { OAuthIcons } from "../common/OAuthIcons";
-import { ArrowInCircle } from "../common/ArrowInCircle/ArrowInCircle";
+import { ArrowInCircle } from "../arrowInCircle/ArrowInCircle";
 
-const Login: Component = () => {
+const Login: () => JSX.Element = () => {
+    const handleForgotPasswordClick = () => {
+        console.log("Forgot password clicked");
+    }
+
+    const handleSignupClick = () => {
+        console.log("Signup clicked");
+    }
+
     return (
         <div class="login-container">
             <div class="login-content">
@@ -14,16 +22,18 @@ const Login: Component = () => {
                         <BasicTextField fieldLabel="Email"/>
                         <BasicTextField fieldLabel="Password"/>
                         <div class="w-full flex justify-end mt-4">
-                            <p class="text-xs underline">Forgot Password</p>
+                            <p class="text-xs cursor-pointer underline" onClick={ handleForgotPasswordClick }>
+                                Forgot Password</p>
                         </div>
-                        <p class="text-xs opacity-70 pt-10 text-center">Login with</p>
                     </div>
-                    <div class="mt-4">
+                    <div class="my-10">
                         <OAuthIcons/>
                     </div>
                     <div class="flex h-full w-full">
-                        <p class="text-xs text-center mt-auto mr-auto pl-6 pb-5">Don't have an<br/>account?</p>
-                        <p class="text-sm text-red-800 mt-auto ml-auto pr-6 pb-5 underline">Signup</p>
+                        <p class="text-xs cursor-pointer text-center mt-auto mr-auto pl-6 pb-5"
+                           onclick={ handleSignupClick }>Don't have an<br/>account?</p>
+                        <p class="text-sm cursor-pointer underline text-red-800 mt-auto ml-auto pr-6 pb-5"
+                           onclick={ handleSignupClick }>Signup</p>
                     </div>
                 </div>
                 <ArrowInCircle/>
