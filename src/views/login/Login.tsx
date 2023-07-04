@@ -1,8 +1,8 @@
 import { JSX } from "solid-js";
-import BasicTextField from "../common/TextField";
+import BasicTextField from "../../components/common/TextField";
 import "./index.scss";
-import { OAuthIcons } from "../common/OAuthIcons";
-import { ArrowInCircle } from "../arrowInCircle/ArrowInCircle";
+import { OAuthIcons } from "../../components/common/OAuthIcons";
+import { ArrowInCircle } from "../../components/arrowInCircle/ArrowInCircle";
 
 const Login: () => JSX.Element = () => {
     const handleForgotPasswordClick = () => {
