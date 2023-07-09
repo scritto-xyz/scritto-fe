@@ -1,21 +1,19 @@
-// private route component for solidjs that wraps the route component and checks local storage for a jwt
-// if the jwt is not present, the user is redirected to the login page
-
-import { Component } from "solid-js";
-import { Route, RouteProps, useNavigate } from "@solidjs/router";
+import { Outlet, useNavigate } from "@solidjs/router";
 import { useAuth } from "../context/AuthContext";
+import { Show } from "solid-js";
+import NotAuthorized from "./NotAuthorized";
 
-const PrivateRoute: Component<RouteProps<any>> = (props) => {
+const PrivateRoute = () => {
     const auth = useAuth();
     const navigate = useNavigate();
-
-    if (!auth) {
-        navigate('/login');
-    }
+    console.log(auth);
+    console.log("PRIVATE ROUTE");
 
     return (
-        <Route { ...props }/>
-    )
+        <Show when={ auth } fallback={ <NotAuthorized/> }>
+            <Outlet/>
+        </Show>
+    );
 };
 
 export default PrivateRoute;

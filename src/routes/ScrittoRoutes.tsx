@@ -1,8 +1,9 @@
 import { Route, Router, Routes } from "@solidjs/router";
 import Login from "../views/login/Login";
-import RequiresAuthComponent from "../views/RequiresAuthComponent";
-import PrivateRoute from "./PrivateRoute";
 import Landing from "../views/landing/Landing";
+import NotFound from "../views/notFound/NotFound";
+import Home from "../views/home/Home";
+import PrivateRoute from "../routes/PrivateRoute";
 
 const ScrittoRoutes = () => {
     return (
@@ -10,10 +11,13 @@ const ScrittoRoutes = () => {
             <Routes>
                 <Route path="/" component={ Landing }/>
                 <Route path="/login" component={ Login }/>
-                <PrivateRoute path="/requiresAuth" component={ RequiresAuthComponent }/>
+                <Route path="*" component={ NotFound }/>
+                <Route path="" component={ PrivateRoute }>
+                    <Route path="/home" component={ Home }/>
+                </Route>
             </Routes>
         </Router>
-    )
+    );
 }
 
 export default ScrittoRoutes;

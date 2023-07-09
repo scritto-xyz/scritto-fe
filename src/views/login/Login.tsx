@@ -3,14 +3,24 @@ import BasicTextField from "../../components/common/TextField";
 import "./index.scss";
 import { OAuthIcons } from "../../components/common/OAuthIcons";
 import { ArrowInCircle } from "../../components/arrowInCircle/ArrowInCircle";
+import { useNavigate } from "@solidjs/router";
 
 const Login: () => JSX.Element = () => {
+    console.log("LOGIN");
+
+    const navigate = useNavigate();
     const handleForgotPasswordClick = () => {
         console.log("Forgot password clicked");
     }
 
     const handleSignupClick = () => {
         console.log("Signup clicked");
+    }
+
+    const login = () => {
+        localStorage.setItem("scritto-jwt", "jwt");
+        console.log("Login clicked");
+        navigate("/user/home");
     }
 
     return (
@@ -36,7 +46,7 @@ const Login: () => JSX.Element = () => {
                            onclick={ handleSignupClick }>Signup</p>
                     </div>
                 </div>
-                <ArrowInCircle/>
+                <ArrowInCircle onClick={ login }/>
             </div>
         </div>
     );

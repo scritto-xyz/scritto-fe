@@ -1,7 +1,7 @@
 import { Component } from "solid-js";
-import Google from "../../../public/assets/GoogleWithBackground.png";
-import Facebook from "../../../public/assets/FacebookWithBackground.png";
-import Twitter from "../../../public/assets/TwitterWithBackground.png";
+import Google from "../../assets/GoogleWithBackground.png";
+import Facebook from "../../assets/FacebookWithBackground.png";
+import Twitter from "../../assets/TwitterWithBackground.png";
 
 export const OAuthIcons: Component = () => {
     return (
