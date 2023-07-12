@@ -9,7 +9,7 @@ const ScrittoRoutes = () => {
     return (
         <Router>
             <Routes>
-                <Route path="/" component={ Landing }/>
+                <Route path="" component={ Landing }/>
                 <Route path="/login" component={ Login }/>
                 <Route path="*" component={ NotFound }/>
                 <Route path="" component={ PrivateRoute }>
