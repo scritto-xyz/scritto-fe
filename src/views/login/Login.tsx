@@ -20,7 +20,7 @@ const Login: () => JSX.Element = () => {
     const login = () => {
         localStorage.setItem("scritto-jwt", "jwt");
         console.log("Login clicked");
-        navigate("/user/home");
+        navigate("/home");
     }
 
     return (
