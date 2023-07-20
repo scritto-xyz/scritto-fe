@@ -24,6 +24,7 @@
     "@suid/icons-material": "^0.6.3",
     "@suid/material": "^0.12.3",
     "@suid/vite-plugin": "^0.1.4",
+    "axios": "^1.4.0",
     "serve": "^14.2.0",
     "solid-js": "^1.7.7"
   }

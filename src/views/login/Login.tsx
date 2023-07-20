@@ -1,12 +1,13 @@
-import { JSX } from "solid-js";
+import { createResource, JSX } from "solid-js";
 import BasicTextField from "../../components/common/TextField";
 import "./index.scss";
 import { OAuthIcons } from "../../components/common/OAuthIcons";
 import { ArrowInCircle } from "../../components/arrowInCircle/ArrowInCircle";
 import { useNavigate } from "@solidjs/router";
+import { echo } from "../../service/scritto/echo";
 
 const Login: () => JSX.Element = () => {
-    console.log("LOGIN");
+    const [data, {mutate, refetch}] = createResource(echo);
 
     const navigate = useNavigate();
     const handleForgotPasswordClick = () => {
