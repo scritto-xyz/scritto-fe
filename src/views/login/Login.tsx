@@ -1,28 +1,43 @@
-import { createResource, JSX } from "solid-js";
+import { createResource, createSignal, JSX } from "solid-js";
 import BasicTextField from "../../components/common/TextField";
 import "./index.scss";
 import { OAuthIcons } from "../../components/common/OAuthIcons";
 import { ArrowInCircle } from "../../components/arrowInCircle/ArrowInCircle";
 import { useNavigate } from "@solidjs/router";
-import { echo } from "../../service/scritto/echo";
+import { echo } from "../../service/scritto/Echo";
+import { LoginRequest, LoginResponse } from "../../model/auth/Login";
+import { login } from "../../service/scritto/Auth";
 
 const Login: () => JSX.Element = () => {
-    const [data, {mutate, refetch}] = createResource(echo);
+    const [data, { mutate, refetch }] = createResource(echo);
+    const [loginRequest, setLoginRequest] = createSignal<LoginRequest>(undefined);
 
     const navigate = useNavigate();
     const handleForgotPasswordClick = () => {
         console.log("Forgot password clicked");
-    }
+    };
 
     const handleSignupClick = () => {
         console.log("Signup clicked");
-    }
+    };
 
-    const login = () => {
-        localStorage.setItem("scritto-jwt", "jwt");
-        console.log("Login clicked");
+    const handleLogin = async () => {
+        const response: LoginResponse = await login(loginRequest());
+        localStorage.setItem("scritto-jwt", response.jwt);
         navigate("/home");
-    }
+    };
+
+    const handleChange = (e: Event) => {
+        const inputTarget = e.target as HTMLInputElement;
+        const { name, value } = inputTarget;
+
+        setLoginRequest((prev): LoginRequest => {
+            return {
+                ...prev,
+                [name]: value
+            };
+        });
+    };
 
     return (
         <div class="login-container">
@@ -30,8 +45,8 @@ const Login: () => JSX.Element = () => {
                 <h1 class="login-cta">Hello, login<br/>with your email</h1>
                 <div class="login-form">
                     <div class="w-10/12 flex-column">
-                        <BasicTextField fieldLabel="Email"/>
-                        <BasicTextField fieldLabel="Password"/>
+                        <BasicTextField onChange={ handleChange } name="email" fieldLabel="Email"/>
+                        <BasicTextField onChange={ handleChange } name="password" fieldLabel="Password"/>
                         <div class="w-full flex justify-end mt-4">
                             <p class="text-xs cursor-pointer underline" onClick={ handleForgotPasswordClick }>
                                 Forgot Password</p>
@@ -47,7 +62,7 @@ const Login: () => JSX.Element = () => {
                            onclick={ handleSignupClick }>Signup</p>
                     </div>
                 </div>
-                <ArrowInCircle onClick={ login }/>
+                <ArrowInCircle onClick={ handleLogin }/>
             </div>
         </div>
     );
