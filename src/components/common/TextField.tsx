@@ -3,6 +3,7 @@ import { Box, TextField } from "@suid/material";
 export interface BasicTextFieldProps {
     fieldLabel: string;
     name: string;
+    type?: string;
     onChange: (e: Event) => void;
 }
 
@@ -11,13 +12,13 @@ export default function BasicTextField(props: BasicTextFieldProps) {
         <Box
             component="form"
             sx={ {
-                "& > :not(style)": {m: 1, maxWidth: "50ch"},
+                "& > :not(style)": { m: 1, maxWidth: "50ch" },
                 textAlign: "center",
             } }
             noValidate
             autocomplete="off"
         >
-            <TextField inputProps={ {name: props.name, onChange: props.onChange} }
+            <TextField inputProps={ { name: props.name, onChange: props.onChange, type: props.type ?? 'text' } }
                        fullWidth={ true } id="standard-basic"
                        label={ props.fieldLabel }
                        variant="standard"/>

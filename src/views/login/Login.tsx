@@ -46,7 +46,8 @@ const Login: () => JSX.Element = () => {
                 <div class="login-form">
                     <div class="w-10/12 flex-column">
                         <BasicTextField onChange={ handleChange } name="email" fieldLabel="Email"/>
-                        <BasicTextField onChange={ handleChange } name="password" fieldLabel="Password"/>
+                        <BasicTextField onChange={ handleChange } name="password" type="password"
+                                        fieldLabel="Password"/>
                         <div class="w-full flex justify-end mt-4">
                             <p class="text-xs cursor-pointer underline" onClick={ handleForgotPasswordClick }>
                                 Forgot Password</p>
