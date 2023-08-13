@@ -27,26 +27,14 @@ const Login: () => JSX.Element = () => {
         navigate("/home");
     };
 
-    const handleChange = (e: Event) => {
-        const inputTarget = e.target as HTMLInputElement;
-        const { name, value } = inputTarget;
-
-        setLoginRequest((prev): LoginRequest => {
-            return {
-                ...prev,
-                [name]: value
-            };
-        });
-    };
-
     return (
         <div class="login-container">
             <div class="login-content">
                 <h1 class="login-cta">Hello, login<br/>with your email</h1>
                 <div class="login-form">
                     <div class="w-10/12 flex-column">
-                        <BasicTextField onChange={ handleChange } name="email" fieldLabel="Email"/>
-                        <BasicTextField onChange={ handleChange } name="password" type="password"
+                        <BasicTextField setter={ setLoginRequest } name="email" fieldLabel="Email"/>
+                        <BasicTextField setter={ setLoginRequest } name="password" type="password"
                                         fieldLabel="Password"/>
                         <div class="w-full flex justify-end mt-4">
                             <p class="text-xs cursor-pointer underline" onClick={ handleForgotPasswordClick }>
