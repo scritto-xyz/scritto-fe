@@ -23,6 +23,10 @@ const Login: () => JSX.Element = () => {
 
     const handleLogin = async () => {
         const response: LoginResponse = await login(loginRequest());
+        if (!response) {
+            return;
+        }
+        
         localStorage.setItem("scritto-jwt", response.jwt);
         navigate("/home");
     };

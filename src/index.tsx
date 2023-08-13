@@ -1,7 +1,7 @@
 /* @refresh reload */
 import './index.css';
 import { render } from 'solid-js/web';
-import ScrittoRoutes from "./routes/ScrittoRoutes";
+import App from "./App";
 
 const root = document.getElementById('root');
 
@@ -11,4 +11,4 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
     );
 }
 
-render(() => <ScrittoRoutes/>, root!);
+render(() => <App/>, root!);
