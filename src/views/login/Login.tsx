@@ -1,4 +1,4 @@
-import { createResource, createSignal, JSX } from "solid-js";
+import { createEffect, createResource, createSignal, JSX } from "solid-js";
 import BasicTextField from "../../components/common/TextField";
 import "./index.scss";
 import { OAuthIcons } from "../../components/common/OAuthIcons";
@@ -7,12 +7,17 @@ import { useNavigate } from "@solidjs/router";
 import { echo } from "../../service/scritto/Echo";
 import { LoginRequest, LoginResponse } from "../../model/auth/Login";
 import { login } from "../../service/scritto/Auth";
+import { useAuth } from "../../context/AuthContext";
+
 
 const Login: () => JSX.Element = () => {
     const [data, { mutate, refetch }] = createResource(echo);
     const [loginRequest, setLoginRequest] = createSignal<LoginRequest>(undefined);
+    const [emailInvalid, setEmailInvalid] = createSignal<boolean>(false);
+    const [passwordInvalid, setPasswordInvalid] = createSignal<boolean>(false);
 
     const navigate = useNavigate();
+    const auth = useAuth();
     const handleForgotPasswordClick = () => {
         console.log("Forgot password clicked");
     };
@@ -21,15 +26,47 @@ const Login: () => JSX.Element = () => {
         console.log("Signup clicked");
     };
 
+    const validateForm = () => {
+        // TODO ==> create generic form validator method which uses interface properties and streamlines this
+
+        let isInvalidForm = false;
+        if (loginRequest().email === undefined || loginRequest().email === '') {
+            setEmailInvalid(true);
+            isInvalidForm = true;
+        } else {
+            setEmailInvalid(false);
+        }
+        if (loginRequest().password === undefined || loginRequest().password === '') {
+            setPasswordInvalid(true);
+            isInvalidForm = true;
+        } else {
+            setPasswordInvalid(false);
+        }
+        console.log('isInvalidForm', isInvalidForm);
+        return isInvalidForm;
+    };
+
     const handleLogin = async () => {
+        const isInvalid = validateForm();
+        if (isInvalid) {
+            return;
+        }
+
         const response: LoginResponse = await login(loginRequest());
         if (!response) {
             return;
         }
-        
+
         localStorage.setItem("scritto-jwt", response.jwt);
         navigate("/home");
     };
+
+    createEffect(() => {
+        if (auth) {
+            navigate("/home");
+        }
+    });
+
 
     return (
         <div class="login-container">
@@ -37,8 +74,11 @@ const Login: () => JSX.Element = () => {
                 <h1 class="login-cta">Hello, login<br/>with your email</h1>
                 <div class="login-form">
                     <div class="w-10/12 flex-column">
-                        <BasicTextField setter={ setLoginRequest } name="email" fieldLabel="Email"/>
-                        <BasicTextField setter={ setLoginRequest } name="password" type="password"
+                        <BasicTextField isInvalidInput={ emailInvalid }
+                                        setter={ setLoginRequest } name="email"
+                                        fieldLabel="Email"/>
+                        <BasicTextField isInvalidInput={ passwordInvalid }
+                                        setter={ setLoginRequest } name="password" type="password"
                                         fieldLabel="Password"/>
                         <div class="w-full flex justify-end mt-4">
                             <p class="text-xs cursor-pointer underline" onClick={ handleForgotPasswordClick }>

@@ -1,13 +1,18 @@
 import { Box, TextField } from "@suid/material";
+import { Accessor, createEffect, createSignal } from "solid-js";
 
 export interface BasicTextFieldProps {
-    fieldLabel: string;
-    name: string;
-    type?: string;
-    setter: (prev: any) => void;
+    readonly fieldLabel: string;
+    readonly name: string;
+    readonly type?: string;
+    required?: boolean;
+    readonly isInvalidInput?: Accessor<boolean>;
+    readonly setter: (prev: any) => void;
 }
 
 export default function BasicTextField(props: BasicTextFieldProps) {
+    const required = props.required ?? true;
+    const [invalidFieldStyle, setInvalidFieldStyle] = createSignal();
     const changeHandler = (e: Event) => {
         const inputTarget = e.target as HTMLInputElement;
         const { name, value } = inputTarget;
@@ -20,6 +25,12 @@ export default function BasicTextField(props: BasicTextFieldProps) {
         });
     };
 
+    createEffect(() => {
+        if (props.isInvalidInput !== undefined && props.isInvalidInput() !== null) {
+            setInvalidFieldStyle(props.isInvalidInput() ? { color: 'red', borderBottom: 'solid 1px red' } : {});
+        }
+    });
+
     return (
         <Box
             component="form"
@@ -30,10 +41,17 @@ export default function BasicTextField(props: BasicTextFieldProps) {
             noValidate
             autocomplete="off"
         >
-            <TextField inputProps={ { name: props.name, onChange: changeHandler, type: props.type ?? 'text' } }
-                       fullWidth={ true } id="standard-basic"
+            <TextField sx={ invalidFieldStyle() } inputProps={ {
+                name: props.name,
+                onChange: changeHandler,
+                type: props.type ?? 'text',
+            } }
+                       fullWidth={ true }
+                       id={ `standard-basic-${ props.name }` }
                        label={ props.fieldLabel }
-                       variant="standard"/>
+                       variant="standard"
+                       required={ required }
+            />
         </Box>
     );
 }
