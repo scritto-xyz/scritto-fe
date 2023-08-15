@@ -1,23 +1,20 @@
 import { Box, TextField } from "@suid/material";
 import { Accessor, createEffect, createSignal } from "solid-js";
+import { FormField, FormFieldEntries } from "../../util/FormValidation";
 
 export interface BasicTextFieldProps {
-    readonly fieldLabel: string;
-    readonly name: string;
-    readonly type?: string;
-    required?: boolean;
-    readonly isInvalidInput?: Accessor<boolean>;
-    readonly setter: (prev: any) => void;
+    readonly formField: FormField;
+    readonly errors?: Accessor<FormFieldEntries>;
 }
 
 export default function BasicTextField(props: BasicTextFieldProps) {
-    const required = props.required ?? true;
+    const { name, required, type, setter, label } = props.formField;
     const [invalidFieldStyle, setInvalidFieldStyle] = createSignal();
     const changeHandler = (e: Event) => {
         const inputTarget = e.target as HTMLInputElement;
         const { name, value } = inputTarget;
 
-        props.setter(prev => {
+        setter(prev => {
             return {
                 ...prev,
                 [name]: value
@@ -26,8 +23,11 @@ export default function BasicTextField(props: BasicTextFieldProps) {
     };
 
     createEffect(() => {
-        if (props.isInvalidInput !== undefined && props.isInvalidInput() !== null) {
-            setInvalidFieldStyle(props.isInvalidInput() ? { color: 'red', borderBottom: 'solid 1px red' } : {});
+        if (props.errors !== undefined && props.errors() && props.errors()[name]) {
+            const invalidStyle = { color: 'red', borderBottom: 'solid 1px red' };
+            setInvalidFieldStyle(invalidStyle);
+        } else {
+            setInvalidFieldStyle(null);
         }
     });
 
@@ -42,13 +42,13 @@ export default function BasicTextField(props: BasicTextFieldProps) {
             autocomplete="off"
         >
             <TextField sx={ invalidFieldStyle() } inputProps={ {
-                name: props.name,
+                name: name,
                 onChange: changeHandler,
-                type: props.type ?? 'text',
+                type: type ?? 'text',
             } }
                        fullWidth={ true }
-                       id={ `standard-basic-${ props.name }` }
-                       label={ props.fieldLabel }
+                       id={ `standard-basic-${ name }` }
+                       label={ label }
                        variant="standard"
                        required={ required }
             />

@@ -8,16 +8,32 @@ import { echo } from "../../service/scritto/Echo";
 import { LoginRequest, LoginResponse } from "../../model/auth/Login";
 import { login } from "../../service/scritto/Auth";
 import { useAuth } from "../../context/AuthContext";
+import { FormFieldEntries, validateForm } from "../../util/FormValidation";
 
 
 const Login: () => JSX.Element = () => {
     const [data, { mutate, refetch }] = createResource(echo);
     const [loginRequest, setLoginRequest] = createSignal<LoginRequest>(undefined);
-    const [emailInvalid, setEmailInvalid] = createSignal<boolean>(false);
-    const [passwordInvalid, setPasswordInvalid] = createSignal<boolean>(false);
+    const formFields: FormFieldEntries = {
+        'email': {
+            name: 'email',
+            label: 'Email',
+            required: true,
+            setter: setLoginRequest
+        },
+        'password': {
+            name: 'password',
+            label: 'Password',
+            type: 'password',
+            required: true,
+            setter: setLoginRequest
+        },
+    };
+    const [errors, setErrors] = createSignal<FormFieldEntries>();
 
     const navigate = useNavigate();
     const auth = useAuth();
+
     const handleForgotPasswordClick = () => {
         console.log("Forgot password clicked");
     };
@@ -26,28 +42,8 @@ const Login: () => JSX.Element = () => {
         console.log("Signup clicked");
     };
 
-    const validateForm = () => {
-        // TODO ==> create generic form validator method which uses interface properties and streamlines this
-
-        let isInvalidForm = false;
-        if (loginRequest().email === undefined || loginRequest().email === '') {
-            setEmailInvalid(true);
-            isInvalidForm = true;
-        } else {
-            setEmailInvalid(false);
-        }
-        if (loginRequest().password === undefined || loginRequest().password === '') {
-            setPasswordInvalid(true);
-            isInvalidForm = true;
-        } else {
-            setPasswordInvalid(false);
-        }
-        console.log('isInvalidForm', isInvalidForm);
-        return isInvalidForm;
-    };
-
     const handleLogin = async () => {
-        const isInvalid = validateForm();
+        const isInvalid = validateForm(loginRequest(), formFields, setErrors);
         if (isInvalid) {
             return;
         }
@@ -74,12 +70,8 @@ const Login: () => JSX.Element = () => {
                 <h1 class="login-cta">Hello, login<br/>with your email</h1>
                 <div class="login-form">
                     <div class="w-10/12 flex-column">
-                        <BasicTextField isInvalidInput={ emailInvalid }
-                                        setter={ setLoginRequest } name="email"
-                                        fieldLabel="Email"/>
-                        <BasicTextField isInvalidInput={ passwordInvalid }
-                                        setter={ setLoginRequest } name="password" type="password"
-                                        fieldLabel="Password"/>
+                        <BasicTextField formField={ formFields['email'] } errors={ errors }/>
+                        <BasicTextField formField={ formFields['password'] } errors={ errors }/>
                         <div class="w-full flex justify-end mt-4">
                             <p class="text-xs cursor-pointer underline" onClick={ handleForgotPasswordClick }>
                                 Forgot Password</p>
