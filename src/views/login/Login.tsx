@@ -1,35 +1,32 @@
-import { createEffect, createResource, createSignal, JSX } from "solid-js";
+import { createEffect, createSignal, JSX } from "solid-js";
 import BasicTextField from "../../components/common/TextField";
 import "./index.scss";
 import { OAuthIcons } from "../../components/common/OAuthIcons";
 import { ArrowInCircle } from "../../components/arrowInCircle/ArrowInCircle";
 import { useNavigate } from "@solidjs/router";
-import { echo } from "../../service/scritto/Echo";
 import { LoginRequest, LoginResponse } from "../../model/auth/Login";
 import { login } from "../../service/scritto/Auth";
 import { useAuth } from "../../context/AuthContext";
-import { FormFieldEntries, validateForm } from "../../util/FormValidation";
+import { FormField, FormFieldEntries, validateForm } from "../../util/FormValidation";
 
 
 const Login: () => JSX.Element = () => {
-    const [data, { mutate, refetch }] = createResource(echo);
     const [loginRequest, setLoginRequest] = createSignal<LoginRequest>(undefined);
-    const formFields: FormFieldEntries = {
+    const [formFields, setFormFields] = createSignal<FormFieldEntries>({
         'email': {
             name: 'email',
             label: 'Email',
             required: true,
             setter: setLoginRequest
-        },
+        } as FormField,
         'password': {
             name: 'password',
             label: 'Password',
             type: 'password',
             required: true,
             setter: setLoginRequest
-        },
-    };
-    const [errors, setErrors] = createSignal<FormFieldEntries>();
+        } as FormField,
+    });
 
     const navigate = useNavigate();
     const auth = useAuth();
@@ -43,8 +40,9 @@ const Login: () => JSX.Element = () => {
     };
 
     const handleLogin = async () => {
-        const isInvalid = validateForm(loginRequest(), formFields, setErrors);
-        if (isInvalid) {
+        const { adjustedEntries, isError } = validateForm(loginRequest(), formFields());
+        if (isError) {
+            setFormFields(adjustedEntries);
             return;
         }
 
@@ -70,8 +68,8 @@ const Login: () => JSX.Element = () => {
                 <h1 class="login-cta">Hello, login<br/>with your email</h1>
                 <div class="login-form">
                     <div class="w-10/12 flex-column">
-                        <BasicTextField formField={ formFields['email'] } errors={ errors }/>
-                        <BasicTextField formField={ formFields['password'] } errors={ errors }/>
+                        <BasicTextField formFieldEntries={ formFields } fieldName="email"/>
+                        <BasicTextField formFieldEntries={ formFields } fieldName="password"/>
                         <div class="w-full flex justify-end mt-4">
                             <p class="text-xs cursor-pointer underline" onClick={ handleForgotPasswordClick }>
                                 Forgot Password</p>

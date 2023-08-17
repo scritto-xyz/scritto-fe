@@ -5,7 +5,7 @@ function numberOrStringIsPresent(value: string | number | undefined | null): boo
         return false;
     }
 
-    return !(typeof value === "string" && value === "");
+    return typeof value === "string" && value !== "";
 }
 
 export interface FormField {
@@ -21,33 +21,42 @@ export interface FormFieldEntries {
     [name: string]: FormField;
 }
 
-function validateFormValues(formValues: any, formFieldEntries: FormFieldEntries): FormFieldEntries {
-    const errors: FormFieldEntries = {};
-
+export function validateForm(formValues: any, formFieldEntries: FormFieldEntries): {
+    adjustedEntries: FormFieldEntries,
+    isError: boolean
+} {
+    const adjustedEntries: FormFieldEntries = {};
+    let isError: boolean = false;
     Object.values(formFieldEntries)
         .forEach((formField) => {
             const { name } = formField;
             const value = formValues[name];
 
-            if (isValidFormValue(value, formField)) {
-                errors[name] = {
+            if (!isValidFormValue(value, formField)) {
+                if (!isError) {
+                    isError = true;
+                }
+
+                adjustedEntries[name] = {
                     ...formField,
                     error: true,
                 };
+            } else {
+                adjustedEntries[name] = {
+                    ...formField,
+                    error: false,
+                };
             }
         });
-    return errors;
+    return { adjustedEntries, isError };
 }
 
 function isValidFormValue(value: any, formField: FormField): boolean {
     const { required } = formField;
 
-    return required && !numberOrStringIsPresent(value);
+    if (!required) {
+        return true;
+    }
+
+    return numberOrStringIsPresent(value);
 }
-
-
-export const validateForm = (values: any, formFields: FormFieldEntries, errorSetter: Setter<FormFieldEntries>) => {
-    const errors = validateFormValues(values, formFields);
-    errorSetter(errors);
-    return Object.entries(errors).length > 0;
-};
