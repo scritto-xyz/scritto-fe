@@ -7,11 +7,11 @@ export const OAuthIcons: Component = () => {
     return (
         <div>
             <p class="text-xs opacity-70 mb-2 text-center">Login with</p>
-            <div class="flex gap-4">
+            <div class="w-full flex gap-4 justify-center">
                 <img alt="Google login" src={ Google }/>
                 <img alt="Facebook login" src={ Facebook }/>
                 <img alt="Twitter login" src={ Twitter }/>
             </div>
         </div>
     );
-}
+};
