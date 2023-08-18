@@ -30,8 +30,7 @@ export function validateForm(formValues: any, formFieldEntries: FormFieldEntries
     Object.values(formFieldEntries)
         .forEach((formField) => {
             const { name } = formField;
-
-            if (!formValues || !Object.entries(formValues).hasOwnProperty(name) || !isValidFormValue(formValues[name], formField)) {
+            if (!formValues || !Object.keys(formValues).includes(name) || !isValidFormValue(formValues[name], formField)) {
                 if (!isError) {
                     isError = true;
                 }
