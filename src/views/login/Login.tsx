@@ -9,6 +9,7 @@ import { login } from "../../service/scritto/Auth";
 import { useAuth } from "../../context/AuthContext";
 import { FormField, FormFieldEntries, validateForm } from "../../util/FormValidation";
 import { CircularProgress } from "@suid/material";
+import { toast } from "solid-toast";
 
 
 const Login: () => JSX.Element = () => {
@@ -30,7 +31,6 @@ const Login: () => JSX.Element = () => {
     });
     const [isDesktopView, setIsDesktopView] = createSignal<boolean>(null);
     const [isLoading, setIsLoading] = createSignal<boolean>(false);
-
     const navigate = useNavigate();
     const auth = useAuth();
 
@@ -46,17 +46,17 @@ const Login: () => JSX.Element = () => {
         setIsLoading(true);
         const { adjustedEntries, isError } = validateForm(loginRequest(), formFields());
         if (isError) {
+            toast.error('Please fill all the required fields');
             setFormFields(adjustedEntries);
+            setIsLoading(false);
             return;
         }
 
         const response: LoginResponse = await login(loginRequest());
         setIsLoading(false);
-
         if (!response) {
             return;
         }
-
         localStorage.setItem("scritto-jwt", response.jwt);
         navigate("/home");
     };

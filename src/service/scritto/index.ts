@@ -7,4 +7,5 @@ export const AX_SCRITTO = axios.create({
         'Content-Type': 'application/json',
         'Accept': 'application/json',
     },
+    timeout: 5000,
 });
