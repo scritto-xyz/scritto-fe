@@ -45,17 +45,17 @@ export default function BasicTextField(props: BasicTextFieldProps) {
             noValidate
             autocomplete="off"
         >
-            <TextField inputProps={ {
+            <TextField
+                sx={ textFieldStyle() } inputProps={ {
                 name: name,
                 onChange: changeHandler,
-                type: type ?? 'text',
-                sx: textFieldStyle()
+                type: type ?? 'text'
             } }
-                       fullWidth={ true }
-                       id={ `standard-basic-${ name }` }
-                       label={ label }
-                       variant="standard"
-                       required={ required }
+                fullWidth={ true }
+                id={ `standard-basic-${ name }` }
+                label={ label }
+                variant="standard"
+                required={ required }
             />
         </Box>
     );
