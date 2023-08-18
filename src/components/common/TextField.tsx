@@ -10,7 +10,7 @@ export interface BasicTextFieldProps {
 export default function BasicTextField(props: BasicTextFieldProps) {
     const formField = props.formFieldEntries()[props.fieldName];
     const { name, required, type, setter, label } = formField;
-    const [invalidFieldStyle, setInvalidFieldStyle] = createSignal();
+    const [textFieldStyle, setTextFieldStyle] = createSignal<Object>();
     const changeHandler = (e: Event) => {
         const inputTarget = e.target as HTMLInputElement;
         const { name, value } = inputTarget;
@@ -29,9 +29,9 @@ export default function BasicTextField(props: BasicTextFieldProps) {
         const isError = props.formFieldEntries()[props.fieldName].error;
         if (isError) {
             const invalidStyle = { color: 'red', borderBottom: 'solid 1px red' };
-            setInvalidFieldStyle(invalidStyle);
+            setTextFieldStyle(invalidStyle);
         } else {
-            setInvalidFieldStyle(null);
+            setTextFieldStyle(null);
         }
     });
 
@@ -39,16 +39,17 @@ export default function BasicTextField(props: BasicTextFieldProps) {
         <Box
             component="form"
             sx={ {
-                "& > :not(style)": { m: 1, maxWidth: "50ch" },
-                textAlign: "center",
+                "& > :not(style)": { m: '8px 0', maxWidth: "50ch" },
+                textAlign: "center"
             } }
             noValidate
             autocomplete="off"
         >
-            <TextField sx={ invalidFieldStyle() } inputProps={ {
+            <TextField inputProps={ {
                 name: name,
                 onChange: changeHandler,
                 type: type ?? 'text',
+                sx: textFieldStyle()
             } }
                        fullWidth={ true }
                        id={ `standard-basic-${ name }` }
