@@ -15,15 +15,23 @@ export interface FormField {
     setter: Setter<any>;
     label?: string;
     error?: boolean;
+    isEmail?: boolean;
 }
 
 export interface FormFieldEntries {
     [name: string]: FormField;
 }
 
+function validateEmail(email: string): boolean {
+    const emailRegex = /\S+@\S+\.\S+/;
+    return emailRegex.test(email);
+}
+
 function isValidFormValue(value: any, formField: FormField): boolean {
-    const { required } = formField;
-    return !required || numberOrStringIsPresent(value);
+    const { required, isEmail } = formField;
+    const valueIsPresent = !required || numberOrStringIsPresent(value);
+    const emailIsValid = !isEmail || validateEmail(value);
+    return valueIsPresent && emailIsValid;
 }
 
 export function validateForm(formValues: any, formFieldEntries: FormFieldEntries): {

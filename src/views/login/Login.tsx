@@ -19,7 +19,8 @@ const Login: () => JSX.Element = () => {
             name: 'email',
             label: 'Email',
             required: true,
-            setter: setLoginRequest
+            setter: setLoginRequest,
+            isEmail: true,
         } as FormField,
         'password': {
             name: 'password',
@@ -46,7 +47,7 @@ const Login: () => JSX.Element = () => {
         setIsLoading(true);
         const { adjustedEntries, isError } = validateForm(loginRequest(), formFields());
         if (isError) {
-            toast.error('Please fill all the required fields');
+            toast.error('Please fill all the required fields correctly');
             setFormFields(adjustedEntries);
             setIsLoading(false);
             return;
