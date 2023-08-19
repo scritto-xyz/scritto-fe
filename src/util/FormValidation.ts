@@ -21,40 +21,30 @@ export interface FormFieldEntries {
     [name: string]: FormField;
 }
 
+function isValidFormValue(value: any, formField: FormField): boolean {
+    const { required } = formField;
+    return !required || numberOrStringIsPresent(value);
+}
+
 export function validateForm(formValues: any, formFieldEntries: FormFieldEntries): {
     adjustedEntries: FormFieldEntries,
     isError: boolean
 } {
     const adjustedEntries: FormFieldEntries = {};
-    let isError: boolean = false;
+    let isFormError: boolean = false;
     Object.values(formFieldEntries)
         .forEach((formField) => {
             const { name } = formField;
+            let isFieldError: boolean = false;
             if (!formValues || !Object.keys(formValues).includes(name) || !isValidFormValue(formValues[name], formField)) {
-                if (!isError) {
-                    isError = true;
-                }
-
-                adjustedEntries[name] = {
-                    ...formField,
-                    error: true,
-                };
-            } else {
-                adjustedEntries[name] = {
-                    ...formField,
-                    error: false,
-                };
+                isFieldError = true;
+                isFormError = true;
             }
+
+            adjustedEntries[name] = {
+                ...formField,
+                error: isFieldError,
+            };
         });
-    return { adjustedEntries, isError };
-}
-
-function isValidFormValue(value: any, formField: FormField): boolean {
-    const { required } = formField;
-
-    if (!required) {
-        return true;
-    }
-
-    return numberOrStringIsPresent(value);
+    return { adjustedEntries, isError: isFormError };
 }
