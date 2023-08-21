@@ -37,13 +37,10 @@ export default function BasicTextField(props: BasicTextFieldProps) {
 
     return (
         <Box
-            component="form"
             sx={ {
-                "& > :not(style)": { m: '8px 0', maxWidth: "50ch" },
+                "& > :not(style)": { m: '8px 0' },
                 textAlign: "center"
             } }
-            noValidate
-            autocomplete="off"
         >
             <TextField
                 sx={ textFieldStyle() } inputProps={ {

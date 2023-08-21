@@ -10,6 +10,7 @@ import { useAuth } from "../../context/AuthContext";
 import { FormField, FormFieldEntries, validateForm } from "../../util/FormValidation";
 import { CircularProgress } from "@suid/material";
 import { toast } from "solid-toast";
+import ScrittoForm from "../../components/common/form/ScrittoForm";
 
 
 const Login: () => JSX.Element = () => {
@@ -40,7 +41,7 @@ const Login: () => JSX.Element = () => {
     };
 
     const handleSignupClick = () => {
-        console.log("Signup clicked");
+        navigate("/signup");
     };
 
     const handleLogin = async () => {
@@ -91,7 +92,7 @@ const Login: () => JSX.Element = () => {
                         <CircularProgress/>
                     </Show>
                 </div>
-                <div class="login-form">
+                <ScrittoForm>
                     <div class="w-10/12 flex-column">
                         <BasicTextField formFieldEntries={ formFields } fieldName="email"/>
                         <BasicTextField formFieldEntries={ formFields } fieldName="password"/>
@@ -110,13 +111,13 @@ const Login: () => JSX.Element = () => {
                            onclick={ handleSignupClick }>Signup</p>
                         <Show when={ isDesktopView() }>
                             <div class="ml-auto">
-                                <ArrowInCircle onClick={ handleLogin }/>
+                                <ArrowInCircle onClick={ handleLogin } margin="-3rem 0 0 0"/>
                             </div>
                         </Show>
                     </div>
-                </div>
+                </ScrittoForm>
                 <Show when={ !isDesktopView() }>
-                    <ArrowInCircle onClick={ handleLogin }/>
+                    <ArrowInCircle onClick={ handleLogin } margin="-3rem 0 0 0"/>
                 </Show>
             </div>
         </div>

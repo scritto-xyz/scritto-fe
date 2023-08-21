@@ -4,6 +4,7 @@ import Landing from "../views/landing/Landing";
 import NotFound from "../views/notFound/NotFound";
 import Home from "../views/home/Home";
 import PrivateRoute from "../routes/PrivateRoute";
+import Signup from "../views/signup/Signup";
 
 const ScrittoRoutes = () => {
     return (
@@ -11,6 +12,7 @@ const ScrittoRoutes = () => {
             <Routes>
                 <Route path="/" component={ Landing }/>
                 <Route path="/login" component={ Login }/>
+                <Route path="/signup" component={ Signup }/>
                 <Route path="*" component={ NotFound }/>
                 <Route path="" component={ PrivateRoute }>
                     <Route path="/home" component={ Home }/>
@@ -18,6 +20,6 @@ const ScrittoRoutes = () => {
             </Routes>
         </Router>
     );
-}
+};
 
 export default ScrittoRoutes;

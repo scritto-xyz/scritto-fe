@@ -1,5 +1,5 @@
 .login-container {
-  background-image: url("../../assets/LoginHeaderGraphicMobile.svg");
+  background-image: url("../../assets/LoginBackgroundMobile.svg");
   height: 100svh;
   padding: 0 5%;
   background-repeat: no-repeat;
@@ -29,30 +29,9 @@
   }
 }
 
-.login-form {
-  width: 100%;
-  max-width: 388px;
-  background-color: white;
-  border-radius: 19px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.overlay-login-loading {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  background: #666666;
-  opacity: .8;
-  z-index: 1000;
-}
-
 @media only screen and (min-width: 768px) {
   .login-container {
-    background-image: url("../../assets/LoginHeaderGraphicDesktop.svg");
+    background-image: url("../../assets/LoginBackgroundDesktop.svg");
     background-size: cover;
     display: flex;
     justify-content: flex-end;
@@ -63,9 +42,10 @@
     height: 100svh;
     background-color: white;
     width: 47.5%;
+    justify-content: center;
   }
 
-  .login-form > div {
+  .scritto-form > div {
     width: 100%;
   }
 

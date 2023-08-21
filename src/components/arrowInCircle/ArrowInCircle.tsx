@@ -2,12 +2,14 @@ import "./index.scss";
 
 interface ArrowInCircleProps {
     onClick: () => void;
+    margin: string;
 }
 
 export const ArrowInCircle = (props: ArrowInCircleProps) => {
-
+    console.log(props.margin);
+    // const margin = props.margin ?? '0';
     return (
-        <span class="bigger-circle cursor-pointer">
+        <span style={ { margin: props.margin } } class="bigger-circle cursor-pointer">
             <div onclick={ props.onClick } class="flex justify-center arrow-in-circle">
                 <svg xmlns="http://www.w3.org/2000/svg" height="5rem" viewBox="0 0 512 512">
                     <path
