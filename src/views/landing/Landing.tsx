@@ -2,7 +2,6 @@ import { Component } from "solid-js";
 import { A } from "@solidjs/router";
 
 const Landing: Component = () => {
-    console.log("LANDING");
     return (
         <div>
             <h1>Landing</h1>

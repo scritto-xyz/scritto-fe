@@ -7,10 +7,12 @@ import { useNavigate } from "@solidjs/router";
 import { LoginRequest, LoginResponse } from "../../model/auth/Login";
 import { login } from "../../service/scritto/Auth";
 import { useAuth } from "../../context/AuthContext";
-import { FormField, FormFieldEntries, validateForm } from "../../util/FormValidation";
+import { validateForm } from "../../form/FormValidation";
 import { CircularProgress } from "@suid/material";
 import { toast } from "solid-toast";
 import ScrittoForm from "../../components/common/form/ScrittoForm";
+import { FormFieldEntries } from "../../form/interface/FormFieldEntries";
+import { FormField, FormFieldType } from "../../form/interface/FormField";
 
 
 const Login: () => JSX.Element = () => {
@@ -21,7 +23,7 @@ const Login: () => JSX.Element = () => {
             label: 'Email',
             required: true,
             setter: setLoginRequest,
-            isEmail: true,
+            formFieldType: FormFieldType.EMAIL,
         } as FormField,
         'password': {
             name: 'password',
@@ -47,9 +49,9 @@ const Login: () => JSX.Element = () => {
     const handleLogin = async () => {
         setIsLoading(true);
         const { adjustedEntries, isError } = validateForm(loginRequest(), formFields());
+        setFormFields(adjustedEntries);
         if (isError) {
             toast.error('Please fill all the required fields correctly');
-            setFormFields(adjustedEntries);
             setIsLoading(false);
             return;
         }
@@ -87,7 +89,7 @@ const Login: () => JSX.Element = () => {
         <div class="login-container">
             <div class="login-content">
                 <div class="login-cta">
-                    <h1>Hello, Login<br/>with your email</h1>
+                    <h1>Hello, login<br/>with your email</h1>
                     <Show when={ isLoading() }>
                         <CircularProgress/>
                     </Show>

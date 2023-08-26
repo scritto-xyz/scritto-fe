@@ -6,8 +6,6 @@ interface ArrowInCircleProps {
 }
 
 export const ArrowInCircle = (props: ArrowInCircleProps) => {
-    console.log(props.margin);
-    // const margin = props.margin ?? '0';
     return (
         <span style={ { margin: props.margin } } class="bigger-circle cursor-pointer">
             <div onclick={ props.onClick } class="flex justify-center arrow-in-circle">

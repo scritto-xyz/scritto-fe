@@ -1,6 +1,6 @@
 import { Box, TextField } from "@suid/material";
 import { Accessor, createEffect, createSignal } from "solid-js";
-import { FormFieldEntries } from "../../util/FormValidation";
+import { FormFieldEntries } from "../../form/interface/FormFieldEntries";
 
 export interface BasicTextFieldProps {
     readonly formFieldEntries: Accessor<FormFieldEntries>;
