@@ -38,7 +38,7 @@ export default function BasicTextField(props: BasicTextFieldProps) {
     return (
         <Box
             sx={ {
-                "& > :not(style)": { m: '8px 0' },
+                "& > :not(style)": { m: '14px 0' },
                 textAlign: "center"
             } }
         >
