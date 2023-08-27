@@ -12,7 +12,7 @@ import { CircularProgress } from "@suid/material";
 import { toast } from "solid-toast";
 import ScrittoForm from "../../components/common/form/ScrittoForm";
 import { FormFieldEntries } from "../../form/interface/FormFieldEntries";
-import { FormField, FormFieldType } from "../../form/interface/FormField";
+import { FormField, ValidationType } from "../../form/interface/FormField";
 
 
 const Login: () => JSX.Element = () => {
@@ -23,7 +23,9 @@ const Login: () => JSX.Element = () => {
             label: 'Email',
             required: true,
             setter: setLoginRequest,
-            formFieldType: FormFieldType.EMAIL,
+            validation: {
+                validationType: ValidationType.EMAIL,
+            },
         } as FormField,
         'password': {
             name: 'password',

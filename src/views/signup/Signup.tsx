@@ -10,7 +10,7 @@ import { toast } from "solid-toast";
 import { signup } from "../../service/scritto/Auth";
 import { useNavigate } from "@solidjs/router";
 import { FormFieldEntries } from "../../form/interface/FormFieldEntries";
-import { FormField, FormFieldType } from "../../form/interface/FormField";
+import { FormField, ValidationType } from "../../form/interface/FormField";
 
 const Signup = () => {
     const [isLoading, setIsLoading] = createSignal<boolean>(false);
@@ -39,7 +39,9 @@ const Signup = () => {
             label: 'Email',
             required: true,
             setter: setSignupRequest,
-            formFieldType: FormFieldType.EMAIL,
+            validation: {
+                validationType: ValidationType.EMAIL,
+            },
         } as FormField,
         'country': {
             name: 'country',
@@ -71,6 +73,10 @@ const Signup = () => {
             required: true,
             setter: setSignupRequest,
             type: 'password',
+            validation: {
+                validationType: ValidationType.PASSWORD,
+                helperText: 'Password must be at least 8 characters long and contain at least one number and one special character',
+            },
         } as FormField,
         'passwordConfirmation': {
             name: 'passwordConfirmation',
@@ -78,8 +84,11 @@ const Signup = () => {
             required: true,
             setter: setSignupRequest,
             type: 'password',
-            formFieldType: FormFieldType.CONFIRMATION,
-            fieldNameToConfirm: 'password',
+            validation: {
+                validationType: ValidationType.CONFIRMATION,
+                fieldNameToConfirm: 'password',
+                helperText: 'Passwords must match',
+            },
         } as FormField,
     });
     const navigate = useNavigate();

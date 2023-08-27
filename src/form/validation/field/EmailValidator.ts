@@ -1,4 +1,4 @@
-import { FormField } from "../../interface/FormField";
+import { FormField, Validation } from "../../interface/FormField";
 import { AbstractValidator } from "./AbstractValidator";
 
 
@@ -7,9 +7,10 @@ export class EmailValidator extends AbstractValidator {
         super(formValues, formField);
     }
 
-    fieldIsValid(): boolean {
+    fieldIsValid(): Validation {
         const { name } = this.formField;
-        return this.valueIsPresent() && this.validateEmail(this.formValues[name]);
+        const isError = this.valueIsPresent() && this.validateEmail(this.formValues[name]);
+        return { error: isError };
     }
 
     private validateEmail = (email: string): boolean => {

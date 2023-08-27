@@ -1,4 +1,4 @@
-import { FormField } from "../../interface/FormField";
+import { FormField, Validation } from "../../interface/FormField";
 
 
 export abstract class AbstractValidator {
@@ -7,10 +7,14 @@ export abstract class AbstractValidator {
         this.formField = formField;
     }
 
-    abstract fieldIsValid(): boolean;
+    abstract fieldIsValid(): Validation;
 
     protected valueIsPresent(): boolean {
-        const { name } = this.formField;
+        const { name, required } = this.formField;
+        if (!required) {
+            return true;
+        }
+
         const value = this.formValues[name];
         if (value === undefined || value === null) {
             return false;

@@ -1,5 +1,6 @@
 import { FormFieldEntries } from "./interface/FormFieldEntries";
 import { ValidationFactory } from "./validation/field/ValidationFactory";
+import { Validation } from "./interface/FormField";
 
 export function validateForm(formValues: any, formFieldEntries: FormFieldEntries): {
     adjustedEntries: FormFieldEntries,
@@ -10,14 +11,19 @@ export function validateForm(formValues: any, formFieldEntries: FormFieldEntries
     Object.values(formFieldEntries)
         .forEach((formField) => {
             const validator = ValidationFactory.createValidator(formValues, formField);
-            const isFieldError = !validator.fieldIsValid();
+            const validation: Validation = validator.fieldIsValid();
+            const { error: isFieldError, passwordValidationFeedback } = validation;
             if (isFieldError && !isFormError) {
                 isFormError = true;
             }
 
             adjustedEntries[formField.name] = {
                 ...formField,
-                error: isFieldError,
+                validation: {
+                    ...formField.validation,
+                    error: isFieldError,
+                    passwordValidationFeedback,
+                },
             };
         });
     return { adjustedEntries, isError: isFormError };

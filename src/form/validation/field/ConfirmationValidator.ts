@@ -1,4 +1,4 @@
-import { FormField } from "../../interface/FormField";
+import { FormField, Validation } from "../../interface/FormField";
 import { AbstractValidator } from "./AbstractValidator";
 
 
@@ -7,8 +7,10 @@ export class ConfirmationValidator extends AbstractValidator {
         super(formValues, formField);
     }
 
-    fieldIsValid(): boolean {
-        const { name, fieldNameToConfirm } = this.formField;
-        return this.valueIsPresent() && this.formValues[name] === this.formValues[fieldNameToConfirm];
+    fieldIsValid(): Validation {
+        const { name, validation } = this.formField;
+        const { fieldNameToConfirm } = validation;
+        const isError = this.valueIsPresent() && this.formValues[name] === this.formValues[fieldNameToConfirm];
+        return { error: isError };
     }
 }
