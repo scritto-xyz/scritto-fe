@@ -26,7 +26,7 @@ export default function BasicTextField(props: BasicTextFieldProps) {
     createEffect(() => {
         // reinitializing because you must call signal accessor from inside createEffect
         // in order for it to be reactive
-        const isError = props.formFieldEntries()[props.fieldName].validation.error;
+        const isError = props.formFieldEntries()[props.fieldName].validation?.error;
         if (isError) {
             const invalidStyle = { color: 'red', borderBottom: 'solid 1px red' };
             setTextFieldStyle(invalidStyle);

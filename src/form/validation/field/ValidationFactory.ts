@@ -8,7 +8,7 @@ import { PasswordValidator } from "./PasswordValidator";
 
 export class ValidationFactory {
     static createValidator(formValues: any, formField: FormField): AbstractValidator {
-        const validationType = formField.validation.validationType;
+        const validationType = formField.validation?.validationType;
         switch (validationType) {
             case ValidationType.CONFIRMATION:
                 return new ConfirmationValidator(formValues, formField);
