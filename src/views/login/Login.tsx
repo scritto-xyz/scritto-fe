@@ -22,7 +22,6 @@ const Login: () => JSX.Element = () => {
             name: 'email',
             label: 'Email',
             required: true,
-            setter: setLoginRequest,
             validation: {
                 validationType: ValidationType.EMAIL,
             },
@@ -32,13 +31,16 @@ const Login: () => JSX.Element = () => {
             label: 'Password',
             type: 'password',
             required: true,
-            setter: setLoginRequest
         } as FormField,
     });
     const [isDesktopView, setIsDesktopView] = createSignal<boolean>(null);
     const [isLoading, setIsLoading] = createSignal<boolean>(false);
     const navigate = useNavigate();
     const auth = useAuth();
+
+    createEffect(() => {
+        console.log(formFields());
+    });
 
     const handleForgotPasswordClick = () => {
         console.log("Forgot password clicked");
@@ -98,8 +100,8 @@ const Login: () => JSX.Element = () => {
                 </div>
                 <ScrittoForm>
                     <div class="w-10/12 flex-column">
-                        <BasicTextField formFieldEntries={ formFields } fieldName="email"/>
-                        <BasicTextField formFieldEntries={ formFields } fieldName="password"/>
+                        <BasicTextField setter={ setFormFields } formFieldEntries={ formFields } fieldName="email"/>
+                        <BasicTextField setter={ setFormFields } formFieldEntries={ formFields } fieldName="password"/>
                         <div class="w-full flex justify-end mt-4">
                             <p class="text-xs cursor-pointer underline" onClick={ handleForgotPasswordClick }>
                                 Forgot Password</p>

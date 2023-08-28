@@ -10,7 +10,7 @@ export function validateForm(formValues: any, formFieldEntries: FormFieldEntries
     let isFormError: boolean = false;
     Object.values(formFieldEntries)
         .forEach((formField) => {
-            const validator = ValidationFactory.createValidator(formValues, formField);
+            const validator = ValidationFactory.createValidator(formField, formFieldEntries);
             const validation: Validation = validator.fieldIsValid();
             const { error: isFieldError, passwordValidationFeedback } = validation;
             if (isFieldError && !isFormError) {

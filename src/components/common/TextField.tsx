@@ -1,24 +1,28 @@
 import { Box, TextField } from "@suid/material";
-import { Accessor, createEffect, createSignal } from "solid-js";
+import { Accessor, createEffect, createSignal, Setter } from "solid-js";
 import { FormFieldEntries } from "../../form/interface/FormFieldEntries";
 
 export interface BasicTextFieldProps {
     readonly formFieldEntries: Accessor<FormFieldEntries>;
     readonly fieldName: string;
+    readonly setter: Setter<any>;
 }
 
 export default function BasicTextField(props: BasicTextFieldProps) {
     const formField = props.formFieldEntries()[props.fieldName];
-    const { name, required, type, setter, label } = formField;
+    const { name, required, type, label } = formField;
     const [textFieldStyle, setTextFieldStyle] = createSignal<Object>();
     const changeHandler = (e: Event) => {
         const inputTarget = e.target as HTMLInputElement;
         const { name, value } = inputTarget;
 
-        setter(prev => {
+        props.setter(prev => {
             return {
                 ...prev,
-                [name]: value
+                [name]: {
+                    ...prev[name],
+                    value: value,
+                },
             };
         });
     };

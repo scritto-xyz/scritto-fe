@@ -3,13 +3,13 @@ import { AbstractValidator } from "./AbstractValidator";
 
 
 export class EmailValidator extends AbstractValidator {
-    constructor(formValues: any, formField: FormField) {
-        super(formValues, formField);
+    constructor(formField: FormField) {
+        super(formField);
     }
 
     fieldIsValid(): Validation {
-        const { name } = this.formField;
-        const isError = this.valueIsPresent() && this.validateEmail(this.formValues[name]);
+        const { value } = this.formField;
+        const isError = !this.valueIsPresent() || !this.validateEmail(value);
         return { error: isError };
     }
 

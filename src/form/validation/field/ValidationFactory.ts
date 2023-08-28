@@ -4,21 +4,22 @@ import { DefaultValidator } from "./DefaultValidator";
 import { AbstractValidator } from "./AbstractValidator";
 import { EmailValidator } from "./EmailValidator";
 import { PasswordValidator } from "./PasswordValidator";
+import { FormFieldEntries } from "../../interface/FormFieldEntries";
 
 
 export class ValidationFactory {
-    static createValidator(formValues: any, formField: FormField): AbstractValidator {
+    static createValidator(formField: FormField, formFieldEntries: FormFieldEntries): AbstractValidator {
         const validationType = formField.validation?.validationType;
         switch (validationType) {
             case ValidationType.CONFIRMATION:
-                return new ConfirmationValidator(formValues, formField);
+                return new ConfirmationValidator(formField, formFieldEntries);
             case ValidationType.EMAIL:
-                return new EmailValidator(formValues, formField);
+                return new EmailValidator(formField);
             case ValidationType.PASSWORD:
-                return new PasswordValidator(formValues, formField);
+                return new PasswordValidator(formField);
             case ValidationType.DEFAULT:
             default:
-                return new DefaultValidator(formValues, formField);
+                return new DefaultValidator(formField);
         }
     }
 }

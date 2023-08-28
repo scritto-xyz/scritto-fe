@@ -118,6 +118,7 @@ const Signup = () => {
                 <For each={ Object.values(formFields()) }>
                     { (field: FormField) => (
                         <BasicTextField
+                            setter={ setFormFields }
                             formFieldEntries={ formFields }
                             fieldName={ field.name }
                         />

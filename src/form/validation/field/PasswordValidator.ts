@@ -3,8 +3,8 @@ import { AbstractValidator } from "./AbstractValidator";
 
 
 export class PasswordValidator extends AbstractValidator {
-    constructor(formValues: any, formField: FormField) {
-        super(formValues, formField);
+    constructor(formField: FormField) {
+        super(formField);
     }
 
     fieldIsValid(): Validation {
@@ -12,8 +12,8 @@ export class PasswordValidator extends AbstractValidator {
             return { error: true };
         }
 
-        const { name } = this.formField;
-        return this.validatePassword(this.formValues[name]);
+        const { value } = this.formField;
+        return this.validatePassword(value);
     }
 
     /**

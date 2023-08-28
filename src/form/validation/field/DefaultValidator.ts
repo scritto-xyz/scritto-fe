@@ -3,11 +3,11 @@ import { AbstractValidator } from "./AbstractValidator";
 
 
 export class DefaultValidator extends AbstractValidator {
-    constructor(formValues: any, formField: FormField) {
-        super(formValues, formField);
+    constructor(formField: FormField) {
+        super(formField);
     }
 
     fieldIsValid(): Validation {
-        return { error: this.valueIsPresent() };
+        return { error: !this.valueIsPresent() };
     }
 }

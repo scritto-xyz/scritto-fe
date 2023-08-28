@@ -1,5 +1,3 @@
-import { Setter } from "solid-js";
-
 export interface PasswordValidationFeedback {
     hasMinLength: boolean;
     containsNumber: boolean;
@@ -25,7 +23,7 @@ export interface FormField {
     name: string;
     required: boolean;
     type?: string;
-    setter: Setter<any>;
     label?: string;
+    value?: string;
     validation?: Validation;
 }
