@@ -1,7 +1,7 @@
 import './index.scss';
 import ScrittoForm from "../../components/common/form/ScrittoForm";
 import { createSignal } from "solid-js";
-import { validateForm } from "../../form/FormValidation";
+import { validateForm } from "../../form/validation/FormValidation";
 import { SignupResponse } from "../../model/auth/Signup";
 import { OAuthIcons } from "../../components/common/OAuthIcons";
 import { ArrowInCircle } from "../../components/arrowInCircle/ArrowInCircle";
@@ -9,77 +9,12 @@ import { toast } from "solid-toast";
 import { signup } from "../../service/scritto/Auth";
 import { useNavigate } from "@solidjs/router";
 import { FormFieldEntries } from "../../form/interface/FormFieldEntries";
-import { FormField, ValidationType } from "../../form/interface/FormField";
 import { TextFieldGroup } from "../../components/common/TextFieldGroup";
+import { SIGNUP_FORM } from "../../form/staticForms/Signup";
 
 const Signup = () => {
     const [isLoading, setIsLoading] = createSignal<boolean>(false);
-    const [formFields, setFormFields] = createSignal<FormFieldEntries>({
-        'first_name': {
-            name: 'email',
-            label: 'First Name',
-            required: true,
-        } as FormField,
-        'last_name': {
-            name: 'last_name',
-            label: 'Last Name',
-            required: true,
-        } as FormField,
-        'username': {
-            name: 'username',
-            label: 'Username',
-            required: true,
-        } as FormField,
-        'email': {
-            name: 'email',
-            label: 'Email',
-            required: true,
-            validation: {
-                validationType: ValidationType.EMAIL,
-            },
-        } as FormField,
-        'country': {
-            name: 'country',
-            label: 'Country',
-            required: true,
-        } as FormField,
-        'state': {
-            name: 'state',
-            label: 'State',
-            required: true,
-        } as FormField,
-        'city': {
-            name: 'city',
-            label: 'City',
-            required: true,
-        } as FormField,
-        'user_type': {
-            name: 'user_type',
-            label: 'User Type',
-            required: true,
-        } as FormField,
-        'password': {
-            name: 'password',
-            label: 'Password',
-            required: true,
-            type: 'password',
-            validation: {
-                validationType: ValidationType.PASSWORD,
-                helperText: 'Password must be at least 8 characters long and contain at least one number and one special character',
-            },
-        } as FormField,
-        'passwordConfirmation': {
-            name: 'passwordConfirmation',
-            label: 'Confirm Password',
-            required: true,
-            type: 'password',
-            validation: {
-                validationType: ValidationType.CONFIRMATION,
-                fieldNameToConfirm: 'password',
-                helperText: 'Passwords must match',
-            },
-        } as FormField,
-    });
+    const [formFields, setFormFields] = createSignal<FormFieldEntries>(SIGNUP_FORM);
     const navigate = useNavigate();
 
     const handleSignup = async () => {

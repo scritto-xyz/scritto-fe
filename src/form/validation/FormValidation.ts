@@ -1,6 +1,6 @@
-import { FormFieldEntries } from "./interface/FormFieldEntries";
-import { ValidationFactory } from "./validation/field/ValidationFactory";
-import { Validation } from "./interface/FormField";
+import { FormFieldEntries } from "../interface/FormFieldEntries";
+import { ValidationFactory } from "./field/ValidationFactory";
+import { Validation } from "../interface/FormField";
 
 export function validateForm(formFieldEntries: FormFieldEntries): {
     validatedEntries: FormFieldEntries,

@@ -6,32 +6,17 @@ import { useNavigate } from "@solidjs/router";
 import { LoginResponse } from "../../model/auth/Login";
 import { login } from "../../service/scritto/Auth";
 import { useAuth } from "../../context/AuthContext";
-import { validateForm } from "../../form/FormValidation";
+import { validateForm } from "../../form/validation/FormValidation";
 import { CircularProgress } from "@suid/material";
 import { toast } from "solid-toast";
 import ScrittoForm from "../../components/common/form/ScrittoForm";
 import { FormFieldEntries } from "../../form/interface/FormFieldEntries";
-import { FormField, ValidationType } from "../../form/interface/FormField";
 import { TextFieldGroup } from "../../components/common/TextFieldGroup";
+import { LOGIN_FORM } from "../../form/staticForms/Login";
 
 
 const Login: () => JSX.Element = () => {
-    const [formFields, setFormFields] = createSignal<FormFieldEntries>({
-        'email': {
-            name: 'email',
-            label: 'Email',
-            required: true,
-            validation: {
-                validationType: ValidationType.EMAIL,
-            },
-        } as FormField,
-        'password': {
-            name: 'password',
-            label: 'Password',
-            type: 'password',
-            required: true,
-        } as FormField,
-    });
+    const [formFields, setFormFields] = createSignal<FormFieldEntries>(LOGIN_FORM);
     const [isDesktopView, setIsDesktopView] = createSignal<boolean>(null);
     const [isLoading, setIsLoading] = createSignal<boolean>(false);
     const navigate = useNavigate();
