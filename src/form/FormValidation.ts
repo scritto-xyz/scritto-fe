@@ -2,8 +2,8 @@ import { FormFieldEntries } from "./interface/FormFieldEntries";
 import { ValidationFactory } from "./validation/field/ValidationFactory";
 import { Validation } from "./interface/FormField";
 
-export function validateForm(formValues: any, formFieldEntries: FormFieldEntries): {
-    adjustedEntries: FormFieldEntries,
+export function validateForm(formFieldEntries: FormFieldEntries): {
+    validatedEntries: FormFieldEntries,
     isError: boolean
 } {
     const adjustedEntries: FormFieldEntries = {};
@@ -26,5 +26,5 @@ export function validateForm(formValues: any, formFieldEntries: FormFieldEntries
                 },
             };
         });
-    return { adjustedEntries, isError: isFormError };
+    return { validatedEntries: adjustedEntries, isError: isFormError };
 }

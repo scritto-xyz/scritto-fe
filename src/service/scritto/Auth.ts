@@ -1,23 +1,34 @@
 import { AX_SCRITTO } from "./index";
 import { LoginRequest, LoginResponse } from "../../model/auth/Login";
-import { toast } from "solid-toast";
-import { SignupResponse } from "../../model/auth/Signup";
+import { SignupRequest, SignupResponse } from "../../model/auth/Signup";
+import { FormFieldEntries } from "../../form/interface/FormFieldEntries";
+import { mapFormFieldsToModel } from "../util";
 
 const AUTH_PATH = 'auth/';
-export const login = async (request: LoginRequest): Promise<LoginResponse> => {
-    return AX_SCRITTO.post(`${ AUTH_PATH }login`, request)
-        .then(response => response.data)
+export const login = async (request: FormFieldEntries): Promise<LoginResponse> => {
+    const mappedRequest: LoginRequest = mapFormFieldsToModel<LoginRequest>(request);
+    return AX_SCRITTO.post(`${ AUTH_PATH }login`, mappedRequest)
+        .then(response => {
+            if (!response?.data) {
+                throw new Error('No login response received');
+            }
+            return response.data;
+        })
         .catch(error => {
-            toast.error('An error occurred');
-            console.log(error);
+            throw error;
         });
 };
 
-export const signup = async (request: any): Promise<SignupResponse> => {
-    return AX_SCRITTO.post(`${ AUTH_PATH }signup`, request)
-        .then(response => response.data)
+export const signup = async (request: FormFieldEntries): Promise<SignupResponse> => {
+    const mappedRequest: LoginRequest = mapFormFieldsToModel<SignupRequest>(request);
+    return AX_SCRITTO.post(`${ AUTH_PATH }signup`, mappedRequest)
+        .then(response => {
+            if (!response?.data) {
+                throw new Error('No signup response received');
+            }
+            return response.data;
+        })
         .catch(error => {
-            toast.error('An error occurred');
-            console.log(error);
+            throw error;
         });
 };
