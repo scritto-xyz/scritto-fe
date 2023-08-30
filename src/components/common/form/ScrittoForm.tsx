@@ -5,6 +5,7 @@ import "./index.scss";
 const ScrittoForm = (props) => {
     return (
         <Box
+            class="scritto-form-container"
             component="form"
             noValidate
             autocomplete="off"

@@ -90,7 +90,7 @@ const Login: () => JSX.Element = () => {
                     </Show>
                 </div>
                 <ScrittoForm>
-                    <div class="w-10/12 flex-column">
+                    <div class="text-field-group-container w-10/12 flex-column">
                         <TextFieldGroup setter={ setFormFields } formFieldEntries={ formFields }
                                         fieldNames={ Object.keys(formFields()) }/>
                         <div class="w-full flex justify-end mt-4">

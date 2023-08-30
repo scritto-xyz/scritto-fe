@@ -36,6 +36,11 @@
     display: flex;
     justify-content: flex-end;
     padding: 0;
+
+    .text-field-group-container {
+      width: 100%;
+      max-width: 388px;
+    }
   }
 
   .login-content {
@@ -43,10 +48,6 @@
     background-color: white;
     width: 47.5%;
     justify-content: center;
-  }
-
-  .scritto-form > div {
-    width: 100%;
   }
 
   .sign-up-cta-buttons {
