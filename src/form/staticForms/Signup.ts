@@ -52,6 +52,11 @@ export const SIGNUP_FORM = {
         validation: {
             validationType: ValidationType.PASSWORD,
             helperText: 'Password must be at least 8 characters long and contain at least one number and one special character',
+            passwordValidationFeedback: {
+                hasMinLength: null,
+                containsNumber: null,
+                containsLetter: null,
+            }
         },
     } as FormField,
     'passwordConfirmation': {
