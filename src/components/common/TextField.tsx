@@ -95,7 +95,12 @@ const ValidationFeedback = (props: FeedbackProps) => {
     }
 
     return (
-        <ul style={{'list-style-type': 'circle', "font-size": '0.8rem', "padding-left": '16px'}}>
+        <ul style={{
+            'list-style-type': 'circle',
+            "font-size": '0.8rem',
+            "padding-left": '16px',
+            "margin": '0',
+        }}>
             {/* @ts-ignore */}
             <li style={getStyle(feedback().hasMinLength)}>Has 8 characters</li>
             {/* @ts-ignore */}
