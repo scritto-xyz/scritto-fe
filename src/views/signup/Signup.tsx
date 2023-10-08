@@ -18,6 +18,8 @@ const Signup = () => {
     const navigate = useNavigate();
 
     const handleSignup = async () => {
+        if (isLoading()) return;
+        
         setIsLoading(true);
         try {
             const { validatedEntries, isError } = validateForm(formFields());
