@@ -5,14 +5,14 @@ export interface UserType {
 
 export interface User {
     id: number;
-    first_name: string;
-    last_name: string;
+    firstName: string;
+    lastName: string;
     username: string;
     email: string;
     country: string;
     state: string;
     city: string;
-    user_type: UserType;
+    userType: UserType;
     password: string;
     createdAt?: Date;
     updatedAt?: Date;
