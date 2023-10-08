@@ -21,7 +21,7 @@ export const login = async (request: FormFieldEntries): Promise<LoginResponse> =
 
 export const signup = async (request: FormFieldEntries): Promise<SignupResponse> => {
     const mappedRequest: LoginRequest = mapFormFieldsToModel<SignupRequest>(request);
-    return AX_SCRITTO.post(`${ AUTH_PATH }signup`, mappedRequest)
+    return AX_SCRITTO.post(`${ AUTH_PATH }register`, mappedRequest)
         .then(response => {
             if (!response?.data) {
                 throw new Error('No signup response received');
