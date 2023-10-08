@@ -3,7 +3,7 @@ import { FormFieldEntries } from "../interface/FormFieldEntries";
 
 export const SIGNUP_FORM: FormFieldEntries = {
     'first_name': {
-        name: 'email',
+        name: 'first_name',
         label: 'First Name',
         required: true,
     } as FormField,
