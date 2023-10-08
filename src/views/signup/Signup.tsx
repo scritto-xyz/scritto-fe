@@ -24,10 +24,11 @@ const Signup = () => {
         try {
             const { validatedEntries, isError } = validateForm(formFields());
             if (isError) {
-                toast.error('Please fill all the required fields correctly');
                 setFormFields(validatedEntries);
+                toast.error('Please fill all the required fields correctly');
                 return;
             }
+            setFormFields(validatedEntries);
 
             const response: SignupResponse = await signup(formFields());
             navigate('/home', { replace: true, state: { user: response } });

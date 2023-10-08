@@ -14,7 +14,7 @@ export class ConfirmationValidator extends AbstractValidator {
     fieldIsValid(): Validation {
         const { value, validation } = this.formField;
         const { fieldNameToConfirm } = validation;
-        const isError = this.valueIsPresent() && value === this.formFieldEntries[fieldNameToConfirm].value;
+        const isError = !(this.valueIsPresent() && value === this.formFieldEntries[fieldNameToConfirm].value);
         return { error: isError };
     }
 }

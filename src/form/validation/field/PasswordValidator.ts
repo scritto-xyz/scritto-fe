@@ -23,7 +23,12 @@ export class PasswordValidator extends AbstractValidator {
     private validatePassword = (password: string): Validation => {
         const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
         if (passwordRegex.test(password)) {
-            return { error: false };
+            return { error: false,
+                passwordValidationFeedback: {
+                    hasMinLength: true,
+                    containsNumber: true,
+                    containsLetter: true,
+                }, };
         }
 
         const hasMinLength = password.length >= 8;
