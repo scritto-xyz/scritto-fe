@@ -91,8 +91,7 @@ const Login: () => JSX.Element = () => {
                 </div>
                 <ScrittoForm>
                     <div class="text-field-group-container w-10/12 flex-column">
-                        <TextFieldGroup setter={ setFormFields } formFieldEntries={ formFields }
-                                        fieldNames={ Object.keys(formFields()) }/>
+                        <TextFieldGroup setter={ setFormFields } formFieldEntries={ formFields }/>
                         <div class="w-full flex justify-end mt-4">
                             <p class="text-xs cursor-pointer underline" onClick={ handleForgotPasswordClick }>
                                 Forgot Password</p>

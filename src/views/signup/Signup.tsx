@@ -44,8 +44,7 @@ const Signup = () => {
         <div class="signup-container">
             <h1 class="text-3xl"><strong>Hello</strong>, set up<br/>your account :)</h1>
             <ScrittoForm>
-                <TextFieldGroup setter={ setFormFields } formFieldEntries={ formFields }
-                                fieldNames={ Object.keys(formFields()) }/>
+                <TextFieldGroup setter={ setFormFields } formFieldEntries={ formFields }/>
                 <div class="mt-8">
                     <OAuthIcons/>
                 </div>
