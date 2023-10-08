@@ -22,10 +22,6 @@ const Login: () => JSX.Element = () => {
     const navigate = useNavigate();
     const auth = useAuth();
 
-    createEffect(() => {
-        console.log(formFields());
-    });
-
     const handleForgotPasswordClick = () => {
         console.log("Forgot password clicked");
     };
@@ -46,8 +42,7 @@ const Login: () => JSX.Element = () => {
 
             const response: LoginResponse = await login(validatedEntries);
             localStorage.setItem("scritto-jwt", response.jwt);
-            // TODO ==> set user context in navigate call
-            navigate("/home");
+            navigate("/home", { state: response });
         } catch (exception: any) {
             console.log(exception);
             if (exception.response?.status === 403) {
