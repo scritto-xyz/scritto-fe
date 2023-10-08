@@ -2,8 +2,8 @@ import { FormField, ValidationType } from "../interface/FormField";
 import { FormFieldEntries } from "../interface/FormFieldEntries";
 
 export const SIGNUP_FORM: FormFieldEntries = {
-    'first_name': {
-        name: 'first_name',
+    'firstName': {
+        name: 'firstName',
         label: 'First Name',
         required: true,
     } as FormField,
@@ -20,8 +20,8 @@ export const SIGNUP_FORM: FormFieldEntries = {
             validationType: ValidationType.EMAIL,
         },
     } as FormField,
-    'user_type': {
-        name: 'user_type',
+    'userType': {
+        name: 'userType',
         label: 'User Type',
         required: true,
     } as FormField,

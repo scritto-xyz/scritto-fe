@@ -6,7 +6,7 @@ import { SignupResponse } from "../../model/auth/Signup";
 import { OAuthIcons } from "../../components/common/OAuthIcons";
 import { ArrowInCircle } from "../../components/arrowInCircle/ArrowInCircle";
 import { toast } from "solid-toast";
-import { signup } from "../../service/scritto/Auth";
+import { signUp } from "../../service/scritto/Auth";
 import { useNavigate } from "@solidjs/router";
 import { FormFieldEntries } from "../../form/interface/FormFieldEntries";
 import { TextFieldGroup } from "../../components/common/TextFieldGroup";
@@ -19,7 +19,7 @@ const Signup = () => {
 
     const handleSignup = async () => {
         if (isLoading()) return;
-        
+
         setIsLoading(true);
         try {
             const { validatedEntries, isError } = validateForm(formFields());
@@ -30,7 +30,7 @@ const Signup = () => {
             }
             setFormFields(validatedEntries);
 
-            const response: SignupResponse = await signup(formFields());
+            const response: SignupResponse = await signUp(formFields());
             navigate('/home', { replace: true, state: { user: response } });
         } catch (exception: any) {
             console.log(exception);
