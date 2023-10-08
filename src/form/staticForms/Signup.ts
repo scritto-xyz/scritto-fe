@@ -1,6 +1,7 @@
 import { FormField, ValidationType } from "../interface/FormField";
+import { FormFieldEntries } from "../interface/FormFieldEntries";
 
-export const SIGNUP_FORM = {
+export const SIGNUP_FORM: FormFieldEntries = {
     'first_name': {
         name: 'email',
         label: 'First Name',
