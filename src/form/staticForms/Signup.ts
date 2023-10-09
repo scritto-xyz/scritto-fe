@@ -24,6 +24,8 @@ export const SIGNUP_FORM: FormFieldEntries = {
         name: 'userType',
         label: 'User Type',
         required: true,
+        type: 'select',
+        selectOptions: [{ label: 'Client', value: 'CLIENT' }, { label: 'Artist', value: 'ARTIST' }],
     } as FormField,
     'password': {
         name: 'password',
