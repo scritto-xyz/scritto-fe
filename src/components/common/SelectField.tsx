@@ -18,45 +18,63 @@ export interface SelectProps {
 export const SelectField = (props: SelectProps) => {
     const { formFieldEntries, fieldName, setter, options } = props;
     const [formField, setFormField] = createSignal<FormField>(formFieldEntries()[fieldName]);
+    const [textFieldStyle, setTextFieldStyle] = createSignal<string>();
 
     createEffect(() => {
         const currentFormField = formFieldEntries()[fieldName];
         setFormField(currentFormField);
     });
 
-    const changeHandler = (e: Event) => {
-        const inputTarget = e.target as HTMLInputElement;
-        const { name, value } = inputTarget;
+    const changeHandler = (e: Event, fieldName: string) => {
+        const inputTarget = e.target as HTMLSelectElement;
+        const { value } = inputTarget;
 
+        console.log('name: ', fieldName);
+        console.log('value: ', value);
         setter(prev => {
             return {
                 ...prev,
-                [name]: {
-                    ...prev[name],
+                [fieldName]: {
+                    ...prev[fieldName],
                     value: value,
                 },
             };
         });
     };
 
+    createEffect(() => {
+        // reinitializing because you must call signal accessor from inside createEffect
+        // in order for it to be reactive
+        const isError = props.formFieldEntries()[props.fieldName].validation?.error;
+        if (isError) {
+            const invalidStyle = "color: red; border: solid 1px red; borderBottom: solid 1px red";
+            setTextFieldStyle(invalidStyle);
+        } else {
+            setTextFieldStyle(null);
+        }
+    });
+
+    // @ts-ignore
+    // @ts-ignore
     return (
 
         <Box
             sx={ {
-                "& > :not(style)": { m: '14px 0' },
+                "& > :not(style)": { m: '30px 0 14px 0 ' },
                 textAlign: "center",
-                width: '100%',
+                width: '50%',
             } }
         >
             <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">User Type</InputLabel>
+                <InputLabel id="demo-simple-select-label">User
+                    Type</InputLabel>
                 <Select
-                    name={ formField().name }
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
+                    style={ textFieldStyle() }
+                    labelId={ formField().name }
+                    id={ formField().name }
                     value={ formField().value }
                     label={ formField().label }
-                    onChange={ changeHandler }
+                    onChange={ (e) => changeHandler(e, formField().name) }
                 >
                     <For each={ options }>
                         { (option) => (<MenuItem value={ option.value }>{ option.label }</MenuItem>) }

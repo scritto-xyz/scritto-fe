@@ -20,13 +20,6 @@ export const SIGNUP_FORM: FormFieldEntries = {
             validationType: ValidationType.EMAIL,
         },
     } as FormField,
-    'userType': {
-        name: 'userType',
-        label: 'User Type',
-        required: true,
-        type: 'select',
-        selectOptions: [{ label: 'Client', value: 'CLIENT' }, { label: 'Artist', value: 'ARTIST' }],
-    } as FormField,
     'password': {
         name: 'password',
         label: 'Password',
@@ -52,5 +45,12 @@ export const SIGNUP_FORM: FormFieldEntries = {
             fieldNameToConfirm: 'password',
             helperText: 'Passwords must match',
         },
+    } as FormField,
+    'userType': {
+        name: 'userType',
+        label: 'User Type',
+        required: true,
+        type: 'select',
+        selectOptions: [{ label: 'Client', value: 'CLIENT' }, { label: 'Artist', value: 'ARTIST' }],
     } as FormField,
 };
