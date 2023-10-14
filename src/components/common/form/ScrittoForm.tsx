@@ -1,8 +1,14 @@
 import './index.scss';
 import { Box } from "@suid/material";
 import "./index.scss";
+import { JSX } from "solid-js";
 
-const ScrittoForm = (props) => {
+interface ScrittoFormProps {
+    readonly children: JSX.Element;
+    onSubmit: () => void;
+}
+
+const ScrittoForm = (props: ScrittoFormProps) => {
     return (
         <Box
             class="scritto-form-container"
@@ -11,9 +17,9 @@ const ScrittoForm = (props) => {
             autocomplete="off"
             sx={ { width: '100%' } }
         >
-            <div class="scritto-form">
+            <form class="scritto-form">
                 { props.children }
-            </div>
+            </form>
         </Box>
     );
 };

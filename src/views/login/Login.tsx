@@ -84,7 +84,7 @@ const Login: () => JSX.Element = () => {
                         <CircularProgress/>
                     </Show>
                 </div>
-                <ScrittoForm>
+                <ScrittoForm onSubmit={ handleLogin }>
                     <div class="text-field-group-container w-10/12 flex-column">
                         <TextFieldGroup setter={ setFormFields } formFieldEntries={ formFields }/>
                         <div class="w-full flex justify-end mt-4">

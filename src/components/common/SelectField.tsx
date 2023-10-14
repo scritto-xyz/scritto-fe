@@ -62,7 +62,7 @@ export const SelectField = (props: SelectProps) => {
             sx={ {
                 "& > :not(style)": { m: '30px 0 14px 0 ' },
                 textAlign: "center",
-                width: '50%',
+                width: '100%',
             } }
         >
             <FormControl fullWidth>

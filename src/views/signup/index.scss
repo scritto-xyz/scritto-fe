@@ -1,16 +1,38 @@
 .signup-container {
   background-image: url("../../assets/SignupBackgroundMobile.svg");
   background-repeat: no-repeat;
-  background-position: top;
-  min-height: 100svh;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0 5%;
+
+  .signup-content {
+    background-position: top;
+    min-height: 100svh;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 5%;
+  }
 
   h1 {
     color: #475751;
     margin: 37px 0;
+  }
+
+  @media only screen and (min-width: 768px) {
+    background-image: url("../../assets/SignupBackgroundDesktop.svg");
+    background-size: cover;
+    display: flex;
+    justify-content: flex-end;
+
+    .text-field-group-container {
+      width: 100%;
+      max-width: 388px;
+    }
+
+
+    .signup-content {
+      min-height: 100svh;
+      background-color: white;
+      width: 47.5%;
+    }
   }
 }

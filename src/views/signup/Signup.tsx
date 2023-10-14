@@ -1,6 +1,6 @@
 import './index.scss';
 import ScrittoForm from "../../components/common/form/ScrittoForm";
-import { createSignal } from "solid-js";
+import { createEffect, createSignal } from "solid-js";
 import { validateForm } from "../../form/validation/FormValidation";
 import { SignupResponse } from "../../model/auth/Signup";
 import { OAuthIcons } from "../../components/common/OAuthIcons";
@@ -15,6 +15,7 @@ import { SIGNUP_FORM } from "../../form/staticForms/Signup";
 const Signup = () => {
     const [isLoading, setIsLoading] = createSignal<boolean>(false);
     const [formFields, setFormFields] = createSignal<FormFieldEntries>(SIGNUP_FORM);
+    const [isDesktopView, setIsDesktopView] = createSignal<boolean>(null);
     const navigate = useNavigate();
 
     const handleSignup = async () => {
@@ -40,16 +41,35 @@ const Signup = () => {
         }
     };
 
+    createEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth >= 768) {
+                setIsDesktopView(true);
+            } else {
+                setIsDesktopView(false);
+            }
+        };
+        window.addEventListener("resize", handleResize);
+        handleResize();
+        return () => window.removeEventListener("resize", handleResize);
+    });
+
     return (
         <div class="signup-container">
-            <h1 class="text-3xl"><strong>Hello</strong>, set up<br/>your account :)</h1>
-            <ScrittoForm>
-                <TextFieldGroup setter={ setFormFields } formFieldEntries={ formFields }/>
-                <div class="mt-8">
-                    <OAuthIcons/>
-                </div>
-                <ArrowInCircle onClick={ handleSignup } margin="2rem 0 -3.75rem 0"/>
-            </ScrittoForm>
+            <div class="signup-content">
+                <h1 class="text-3xl text-center">set up<br/>your account :)</h1>
+                <ScrittoForm onSubmit={ handleSignup }>
+                    <div class="text-field-group-container w-10/12 flex-column">
+
+                        <TextFieldGroup setter={ setFormFields } formFieldEntries={ formFields }/>
+                    </div>
+                    <div class="mt-8">
+                        <OAuthIcons/>
+                    </div>
+                    <ArrowInCircle onClick={ handleSignup }
+                                   margin={ isDesktopView() ? '2rem 0 0 0' : '2rem 0 -3.75rem 0' }/>
+                </ScrittoForm>
+            </div>
         </div>
     );
 };
