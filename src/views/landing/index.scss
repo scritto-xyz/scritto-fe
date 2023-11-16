@@ -1,0 +1,12 @@
+.landing-container {
+  background-image: url('../../assets/ArtistWorking.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  .landing-content {
+    padding: 10px 3%;
+    min-height: 100vh;
+    opacity: 0.9;
+  }
+}

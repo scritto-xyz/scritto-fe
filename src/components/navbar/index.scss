@@ -1,0 +1,61 @@
+.no-select {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                   supported by Chrome, Edge, Opera and Firefox */
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  border-bottom: 1px solid rgb(255, 255, 255, 0.8);
+
+  .name-and-icon {
+    display: flex;
+    cursor: pointer;
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 0;
+      color: white;
+    }
+
+    .logo {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+    }
+
+  }
+
+  .burger-container {
+    height: 50px;
+    width: 50px;
+    background-color: rgb(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12%;
+
+    .burger-icon {
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+    }
+
+    &:hover {
+      width: 55px;
+      height: 55px;
+      transition: width .1s;
+      -webkit-transition: width .1s;
+    }
+  }
+
+}
