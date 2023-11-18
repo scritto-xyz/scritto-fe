@@ -30,7 +30,7 @@ const NavBar: Component = () => {
                 <h1 class="name">seekr</h1>
             </div>
             <div class="burger-container" onClick={ () => setIsOpen(true) }>
-                <img src={ Burger } alt="menu" class="burger-icon no-select"/>
+                <img src={ Burger } alt="menu" class="burger-icon"/>
             </div>
             <Drawer
                 anchor="left"
