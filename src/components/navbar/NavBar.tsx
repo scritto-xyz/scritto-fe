@@ -1,4 +1,4 @@
-import { Component, createSignal } from "solid-js";
+import { Component, createEffect, createSignal, Show } from "solid-js";
 import Logo from '../../assets/Logo.svg';
 import Burger from '../../assets/HamburgerMenu.svg';
 import './index.scss';
@@ -9,9 +9,19 @@ import CategoryIcon from '@suid/icons-material/Category';
 import ForumIcon from '@suid/icons-material/Forum';
 import AccountBoxIcon from '@suid/icons-material/AccountBox';
 import LogoutIcon from "@suid/icons-material/Logout";
+import LoginIcon from '@suid/icons-material/Login';
+import { useAuth } from "../../context/AuthContext";
 
 const NavBar: Component = () => {
     const [isOpen, setIsOpen] = createSignal<boolean>(false);
+    const [isLoggedIn, setIsLoggedIn] = createSignal<boolean>(false);
+
+    createEffect(() => {
+        const auth = useAuth();
+        if (auth) {
+            setIsLoggedIn(true);
+        }
+    });
 
     return (
         <div class="navbar-container">
@@ -36,7 +46,9 @@ const NavBar: Component = () => {
                     <MenuListItem text="My Profile" icon={ <AccountBoxIcon/> }/>
                     <MenuListItem text="Appointments" icon={ <CalendarMonthIcon/> }/>
                     <MenuListItem text="Messages" icon={ <ForumIcon/> }/>
-                    <MenuListItem text="Logout" icon={ <LogoutIcon/> }/>
+                    <Show when={ isLoggedIn() } fallback={ <MenuListItem text="Login" icon={ <LoginIcon/> }/> }>
+                        <MenuListItem text="Logout" icon={ <LogoutIcon/> }/>
+                    </Show>
                 </List>
             </Drawer>
         </div>
