@@ -1,18 +1,18 @@
-import { createEffect, createSignal, JSX, Show } from "solid-js";
+import {createEffect, createSignal, JSX, Show} from "solid-js";
 import "./index.scss";
-import { OAuthIcons } from "../../components/common/OAuthIcons";
-import { ArrowInCircle } from "../../components/arrowInCircle/ArrowInCircle";
-import { useNavigate } from "@solidjs/router";
-import { LoginResponse } from "../../model/auth/Login";
-import { login } from "../../service/scritto/Auth";
-import { useAuth } from "../../context/AuthContext";
-import { validateForm } from "../../form/validation/FormValidation";
-import { CircularProgress } from "@suid/material";
-import { toast } from "solid-toast";
+import {OAuthIcons} from "../../components/common/OAuthIcons";
+import {ArrowInCircle} from "../../components/arrowInCircle/ArrowInCircle";
+import {useNavigate} from "@solidjs/router";
+import {LoginResponse} from "../../model/auth/Login";
+import {login} from "../../service/scritto/Auth";
+import {useAuth} from "../../context/AuthContext";
+import {validateForm} from "../../form/validation/FormValidation";
+import {CircularProgress} from "@suid/material";
+import {toast} from "solid-toast";
 import ScrittoForm from "../../components/common/form/ScrittoForm";
-import { FormFieldEntries } from "../../form/interface/FormFieldEntries";
-import { TextFieldGroup } from "../../components/common/TextFieldGroup";
-import { LOGIN_FORM } from "../../form/staticForms/Login";
+import {FormFieldEntries} from "../../form/interface/FormFieldEntries";
+import {TextFieldGroup} from "../../components/common/TextFieldGroup";
+import {LOGIN_FORM} from "../../form/staticForms/Login";
 
 
 const Login: () => JSX.Element = () => {
@@ -33,7 +33,7 @@ const Login: () => JSX.Element = () => {
     const handleLogin = async () => {
         setIsLoading(true);
         try {
-            const { validatedEntries, isError } = validateForm(formFields());
+            const {validatedEntries, isError} = validateForm(formFields());
             setFormFields(validatedEntries);
             if (isError) {
                 toast.error('Please fill all the required fields correctly');
@@ -41,8 +41,8 @@ const Login: () => JSX.Element = () => {
             }
 
             const response: LoginResponse = await login(validatedEntries);
-            localStorage.setItem("scritto-jwt", response.jwt);
-            navigate("/home", { state: response });
+            localStorage.setItem("seekr-jwt", response.jwt);
+            navigate("/home", {state: response});
         } catch (exception: any) {
             console.log(exception);
             if (exception.response?.status === 403) {
@@ -80,15 +80,15 @@ const Login: () => JSX.Element = () => {
             <div class="login-content">
                 <div class="login-cta">
                     <h1>Hello, login<br/>with your email</h1>
-                    <Show when={ isLoading() }>
+                    <Show when={isLoading()}>
                         <CircularProgress/>
                     </Show>
                 </div>
-                <ScrittoForm onSubmit={ handleLogin }>
+                <ScrittoForm onSubmit={handleLogin}>
                     <div class="text-field-group-container w-10/12 flex-column">
-                        <TextFieldGroup setter={ setFormFields } formFieldEntries={ formFields }/>
+                        <TextFieldGroup setter={setFormFields} formFieldEntries={formFields}/>
                         <div class="w-full flex justify-end mt-4">
-                            <p class="text-xs cursor-pointer underline" onClick={ handleForgotPasswordClick }>
+                            <p class="text-xs cursor-pointer underline" onClick={handleForgotPasswordClick}>
                                 Forgot Password</p>
                         </div>
                     </div>
@@ -97,18 +97,18 @@ const Login: () => JSX.Element = () => {
                     </div>
                     <div class="flex h-full w-full items-center sign-up-cta-buttons">
                         <p class="text-xs cursor-pointer text-center mt-auto mr-auto pl-6 pb-5"
-                           onclick={ handleSignupClick }>Don't have an<br/>account?</p>
+                           onclick={handleSignupClick}>Don't have an<br/>account?</p>
                         <p class="text-sm cursor-pointer underline text-red-800 mt-auto ml-auto pr-6 pb-5"
-                           onclick={ handleSignupClick }>Signup</p>
-                        <Show when={ isDesktopView() }>
+                           onclick={handleSignupClick}>Signup</p>
+                        <Show when={isDesktopView()}>
                             <div class="ml-auto">
-                                <ArrowInCircle onClick={ handleLogin } margin="-3rem 0 0 0"/>
+                                <ArrowInCircle onClick={handleLogin} margin="-3rem 0 0 0"/>
                             </div>
                         </Show>
                     </div>
                 </ScrittoForm>
-                <Show when={ !isDesktopView() }>
-                    <ArrowInCircle onClick={ handleLogin } margin="-3rem 0 0 0"/>
+                <Show when={!isDesktopView()}>
+                    <ArrowInCircle onClick={handleLogin} margin="-3rem 0 0 0"/>
                 </Show>
             </div>
         </div>

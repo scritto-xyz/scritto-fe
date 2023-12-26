@@ -1,6 +1,6 @@
-import { useLocation } from "@solidjs/router";
-import { createSignal } from "solid-js";
-import { User } from "../../model/entity/User";
+import {useLocation} from "@solidjs/router";
+import {createSignal} from "solid-js";
+import {User} from "../../model/entity/User";
 
 
 const Home = () => {
@@ -9,6 +9,7 @@ const Home = () => {
     createSignal(() => {
         setUser(useLocation().state as User);
     });
+    console.log(user());
 
     return (
         <div>
