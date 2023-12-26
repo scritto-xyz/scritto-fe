@@ -1,10 +1,11 @@
-import { User } from "../entity/User";
+import {User} from "../entity/User";
 
 export interface LoginRequest {
     email: string;
     password: string;
 }
 
-export interface LoginResponse extends User {
+export interface LoginResponse {
     jwt: string;
+    user: User;
 }

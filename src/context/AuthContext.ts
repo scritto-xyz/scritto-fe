@@ -1,3 +1,3 @@
 export const useAuth = () => {
-    return localStorage.getItem('scritto-jwt');
+    return localStorage.getItem('seekr-jwt');
 };
