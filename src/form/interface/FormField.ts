@@ -1,4 +1,4 @@
-import { SelectOption } from "../../components/common/SelectField";
+import {SelectOption} from "../../components/common/SelectField";
 
 export interface PasswordValidationFeedback {
     hasMinLength: boolean;
@@ -24,7 +24,7 @@ export interface Validation {
 export interface FormField {
     name: string;
     required: boolean;
-    type?: string;
+    htmlType?: string;
     label?: string;
     value?: string;
     validation?: Validation;

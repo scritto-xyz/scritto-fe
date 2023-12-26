@@ -1,5 +1,5 @@
-import { FormField, ValidationType } from "../interface/FormField";
-import { FormFieldEntries } from "../interface/FormFieldEntries";
+import {FormField, ValidationType} from "../interface/FormField";
+import {FormFieldEntries} from "../interface/FormFieldEntries";
 
 export const LOGIN_FORM: FormFieldEntries = {
     'email': {
@@ -13,7 +13,7 @@ export const LOGIN_FORM: FormFieldEntries = {
     'password': {
         name: 'password',
         label: 'Password',
-        type: 'password',
+        htmlType: 'password',
         required: true,
     } as FormField,
 };

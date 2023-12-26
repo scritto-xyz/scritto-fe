@@ -1,4 +1,4 @@
-import { FormField, ValidationType } from "../interface/FormField";
+import {FormField, ValidationType} from "../interface/FormField";
 
 export const SIGNUP_FORM = {
     'first_name': {
@@ -48,7 +48,7 @@ export const SIGNUP_FORM = {
         name: 'password',
         label: 'Password',
         required: true,
-        type: 'password',
+        htmlType: 'password',
         validation: {
             validationType: ValidationType.PASSWORD,
             helperText: 'Password must be at least 8 characters long and contain at least one number and one special character',
@@ -63,7 +63,7 @@ export const SIGNUP_FORM = {
         name: 'passwordConfirmation',
         label: 'Confirm Password',
         required: true,
-        type: 'password',
+        htmlType: 'password',
         validation: {
             validationType: ValidationType.CONFIRMATION,
             fieldNameToConfirm: 'password',

@@ -1,5 +1,5 @@
-import { FormField, ValidationType } from "../interface/FormField";
-import { FormFieldEntries } from "../interface/FormFieldEntries";
+import {FormField, ValidationType} from "../interface/FormField";
+import {FormFieldEntries} from "../interface/FormFieldEntries";
 
 export const SIGNUP_FORM: FormFieldEntries = {
     'firstName': {
@@ -24,7 +24,7 @@ export const SIGNUP_FORM: FormFieldEntries = {
         name: 'password',
         label: 'Password',
         required: true,
-        type: 'password',
+        htmlType: 'password',
         validation: {
             validationType: ValidationType.PASSWORD,
             helperText: 'Password must be at least 8 characters long and contain at least one number and one special character',
@@ -39,7 +39,7 @@ export const SIGNUP_FORM: FormFieldEntries = {
         name: 'passwordConfirmation',
         label: 'Confirm Password',
         required: true,
-        type: 'password',
+        htmlType: 'password',
         validation: {
             validationType: ValidationType.CONFIRMATION,
             fieldNameToConfirm: 'password',
@@ -50,7 +50,7 @@ export const SIGNUP_FORM: FormFieldEntries = {
         name: 'userType',
         label: 'User Type',
         required: true,
-        type: 'select',
-        selectOptions: [{ label: 'Client', value: 'CLIENT' }, { label: 'Artist', value: 'ARTIST' }],
+        htmlType: 'select',
+        selectOptions: [{label: 'Client', value: 'CLIENT'}, {label: 'Artist', value: 'ARTIST'}],
     } as FormField,
 };

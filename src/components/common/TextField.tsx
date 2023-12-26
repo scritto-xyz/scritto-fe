@@ -11,7 +11,7 @@ export interface BasicTextFieldProps {
 
 export default function BasicTextField(props: BasicTextFieldProps) {
     const formField = props.formFieldEntries()[props.fieldName];
-    const {name, required, type, label} = formField;
+    const {name, required, htmlType, label} = formField;
     const [textFieldStyle, setTextFieldStyle] = createSignal<Object>();
     const [validationFeedback, setValidationFeedback] = createSignal<PasswordValidationFeedback>(formField.validation?.passwordValidationFeedback);
     const changeHandler = (e: Event) => {
@@ -57,7 +57,7 @@ export default function BasicTextField(props: BasicTextFieldProps) {
                 sx={textFieldStyle()} inputProps={{
                 name: name,
                 onChange: changeHandler,
-                type: type ?? 'text'
+                type: htmlType ?? 'text'
             }}
                 fullWidth={true}
                 id={`standard-basic-${name}`}
