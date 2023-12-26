@@ -9,7 +9,6 @@ const Home = () => {
     createSignal(() => {
         setUser(useLocation().state as User);
     });
-    console.log(user());
 
     return (
         <div>
