@@ -17,7 +17,6 @@ export default function BasicTextField(props: BasicTextFieldProps) {
     const changeHandler = (e: Event) => {
         const inputTarget = e.target as HTMLInputElement;
         const {name, value} = inputTarget;
-
         props.setter(prev => {
             return {
                 ...prev,
@@ -54,11 +53,12 @@ export default function BasicTextField(props: BasicTextFieldProps) {
             }}
         >
             <TextField
-                sx={textFieldStyle()} inputProps={{
-                name: name,
-                onChange: changeHandler,
-                type: htmlType ?? 'text'
-            }}
+                sx={textFieldStyle()}
+                inputProps={{
+                    name: name,
+                    type: htmlType ?? 'text',
+                    onChange: changeHandler,
+                }}
                 fullWidth={true}
                 id={`standard-basic-${name}`}
                 label={label}

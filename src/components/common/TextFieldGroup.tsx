@@ -1,6 +1,7 @@
 import {Accessor, For, Setter} from "solid-js";
 import {FormFieldEntries} from "../../form/interface/FormFieldEntries";
 import BasicTextField from "./TextField";
+import {FormField} from "../../form/interface/FormField";
 import {SelectField} from "./SelectField";
 
 
@@ -10,9 +11,11 @@ interface TextFieldGroupProps {
 }
 
 export function TextFieldGroup(props: TextFieldGroupProps) {
+    const formFieldEntries = props.formFieldEntries();
     return (
-        <For each={Object.entries(props.formFieldEntries())}>
-            {([fieldName, formField]) => {
+        <For each={Object.keys(formFieldEntries)}>
+            {(fieldName: string) => {
+                const formField: FormField = formFieldEntries[fieldName];
                 const inputType = formField.htmlType;
                 switch (inputType) {
                     case 'select':
