@@ -4,7 +4,7 @@ import {OAuthIcons} from "../../components/common/OAuthIcons";
 import {ArrowInCircle} from "../../components/arrowInCircle/ArrowInCircle";
 import {useNavigate} from "@solidjs/router";
 import {LoginResponse} from "../../model/auth/Login";
-import {login} from "../../service/scritto/Auth";
+import {login} from "../../service/seekr/Auth";
 import {useAuth} from "../../context/AuthContext";
 import {validateForm} from "../../form/validation/FormValidation";
 import {CircularProgress} from "@suid/material";
